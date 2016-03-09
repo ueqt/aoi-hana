@@ -1,0 +1,25 @@
+{
+    "name": "aoi-hana",
+    "version": "1.0.0",
+    "description": "A history of human",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron main.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ueqt/aoi-hana.git"
+    },
+    "keywords": [
+        "Electron",
+        "aoi",
+        "hana",
+        "history"
+    ],
+    "author": "ueqt",
+    "license": "CC0-1.0",
+    "bugs": {
+        "url": "https://github.com/ueqt/aoi-hana/issues"
+    },
+    "homepage": "https://github.com/ueqt/aoi-hana#readme"
+}
