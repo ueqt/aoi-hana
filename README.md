@@ -16,3 +16,10 @@ cd aoi-hana
 # Install dependencies and run the app
 npm install && npm start
 ```
+
+## To Release
+
+```bash
+git tag -a "v0.1.0" -m "test auto release from travis"
+git push origin master --tags
+```
