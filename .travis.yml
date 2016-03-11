@@ -1,13 +1,13 @@
-os: osx
 language: node_js
 node_js:
 - '5.2'
 branches:
   only:
   - master
-before_install:
-  - brew update
-  - brew install wine
+addons:
+  apt:
+    packages:
+    - wine
 before_script:
 - npm install bower -g
 - bower install
