@@ -4,6 +4,9 @@ node_js:
 branches:
   only:
   - master
+before_install:
+  - brew update
+  - brew install wine
 before_script:
 - npm install bower -g
 - bower install
