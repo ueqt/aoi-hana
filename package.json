@@ -1,6 +1,6 @@
 {
   "name": "aoi-hana",  
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A history of human",
   "main": "main.js",
   "scripts": {
