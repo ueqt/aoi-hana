@@ -1,0 +1,28 @@
+language: node_js
+node_js:
+- '5.2'
+branches:
+  only:
+  - master
+before_script:
+- bower install
+- npm install
+script:
+- "./scripts/build-all.sh"
+- "./scripts/tar-all.sh"
+deploy:
+  provider: releases
+  api_key:
+    secure: JhVCrVRvbRA+2o6VdUbq0I3UFJ6ZItSF+A2npCshRegK/yI8E0EgBOmMkOtI1eEe65o6QzkQcpNXyWDVodyYK/uMTo478voNptRZ6p1ABT3UEIH/ypB7KkWHkhHLf516brnUxnrWkcCFbSnXXV/b33IJv4HWPYG42e8qY4qGCadrIh8rSmxryuIQSLosXHwb/fHcuoxnIaJVYiiISAy6/4mD2kY5zWrytl80RAQdAQ9qP4wfyMrlMCVYRokzmniBg3x+w2nr9jagTh1pBIofwtVJ1p9j5YkYZsa/lG9Hy0kUg+zkv2blsC17Yr+JcGrYKX+ojtrSRyZUZbobHCakVd+8pdnfX0xYUcB+GvOyccKQySLBtwGP4HWluFTw5zPgcgf1oqTW/epTeGEdfXB1uNspr+UQ6cgnN1rE80iK0TKFQ+LuHWN9RndcYcmGJxve6RbyYL9u8voFz6crwjJOcMVSkMedeNN86GIiR42lHdcZYnbqPG5ZRsRwG8nFfNlDGHqdyEjLW80z4kD+QzEgn3DLT0RObcy746oMskJDgrv3Aq0uLABegvQfyc5whjs3WDTXDoATHYB+dWSGOBQypWSB+x+4uBAwAp1dukgNyQnsOIatmB+y+tdQvdcmPBat2b0ynofDwkFFYUsTyTT48ATOYNDzkhWUS9/VH1yYJAE=
+  file: 
+  - 'dist/mac-osx.tar.gz'
+  - 'dist/linux-x64.tar.gz'
+  - 'dist/linux-ia32.tar.gz'
+  - 'dist/win32-x64.tar.gz'
+  - 'dist/win32-ia32.tar.gz'
+  on:
+    repo: ueqt/aoi-hana
+    all_branches: true
+    tags: true
+notifications:
+  email: false

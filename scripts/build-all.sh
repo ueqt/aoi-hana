@@ -12,7 +12,7 @@ function build() {
 }
 
 build darwin x64
-#build linux ia32
-#build linux x64
-#build win32 ia32
+build linux ia32
+build linux x64
+build win32 ia32
 build win32 x64
