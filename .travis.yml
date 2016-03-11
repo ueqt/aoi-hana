@@ -4,7 +4,7 @@ node_js:
 branches:
   only:
   - master
-  - /v\d+\.\d+[a-z]/
+  - /v\d+\.\d+.\d+/
 addons:
   apt:
     packages:
