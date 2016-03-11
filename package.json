@@ -1,6 +1,5 @@
 {
-  "name": "aoi-hana",
-  "productName": "aoi-hana",
+  "name": "aoi-hana",  
   "version": "0.1.0",
   "description": "A history of human",
   "main": "main.js",
