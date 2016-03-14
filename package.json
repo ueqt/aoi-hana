@@ -3,17 +3,22 @@
   "version": "0.1.1",
   "description": "A history of human",
   "main": "main.js",
-  "scripts": {
-    "start": "electron main.js",
-    "build": "./scripts/build-all.sh",
+  "scripts": {    
+    "start": "npm run build:js && npm run build:css && electron main.js --debug=5858 --enable-logging 2>&1 | silence-chromium",
+    "build:css": "stylus -u nib browser/css/app.styl -o static/css/app.css",
+    "build:js": "browserify browser/js/entry.js -o static/js/bundle.js",
+    "release:css": "stylus -u nib browser/css/app.styl -o static/css/app.css -c",
+    "release:js": "browserify browser/js/entry.js | uglifyjs > static/js/bundle.js",
+    "prebuild": "npm run release:css && npm run release:js",
+    "build": "npm run prebuild && ./scripts/build-all.sh",
     "build:osx": "npm run build:osx64",
-    "build:osx64": "./scripts/build.sh darwin x64",
-    "build:linux32": "./scripts/build.sh linux ia32",
+    "build:osx64": "npm run prebuild && ./scripts/build.sh darwin x64",
+    "build:linux32": "npm run prebuild && ./scripts/build.sh linux ia32",
     "build:linux": "npm run build:linux64",
-    "build:linux64": "./scripts/build.sh linux x64",
+    "build:linux64": "npm run prebuild && ./scripts/build.sh linux x64",
     "build:win": "npm run build:win64",
-    "build:win32": "./scripts/build.sh win32 ia32",
-    "build:win64": "./scripts/build.sh win32 x64"
+    "build:win32": "npm run prebuild && ./scripts/build.sh win32 ia32",
+    "build:win64": "npm run prebuild && ./scripts/build.sh win32 x64"
   },
   "repository": {
     "type": "git",
@@ -33,7 +38,13 @@
   },
   "homepage": "https://github.com/ueqt/aoi-hana#readme",
   "devDependencies": {
+    "browserify": "latest",
+    "electron-debug": "latest",
     "electron-packager": "latest",
-    "electron-prebuilt": "latest"
+    "electron-prebuilt": "latest",
+    "nib": "latest",
+    "silence-chromium": "latest",
+    "stylus": "latest",
+    "uglifyjs": "latest"      
   }
 }

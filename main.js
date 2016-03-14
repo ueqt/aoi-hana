@@ -7,6 +7,10 @@ const ipcMain = electron.ipcMain;
 
 const WINDOW_TITLE = '历史人物族谱';
 
+require('electron-debug')({
+    showDevTools: false
+});
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
@@ -16,7 +20,7 @@ function createWindow() {
     mainWindow = new BrowserWindow({ 
         width: 800, 
         height: 600,
-        resizable: false,
+        resizable: true,
         center: true,
         frame: true,
         autoHideMenuBar: true,
@@ -26,7 +30,7 @@ function createWindow() {
         show: false         
     });
     
-    mainWindow.loadURL('file://' + __dirname + '/index.html');
+    mainWindow.loadURL('file://' + __dirname + '/static/view/index.html');
 
     // Open the DevTools.
     //mainWindow.webContents.openDevTools();

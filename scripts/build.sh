@@ -23,17 +23,17 @@ VERSION=${VERSION:1}
 echo "Start packaging for $PLATFORM $ARCH ."
 
 if [ "$PLATFORM" = "win32" ]; then
-  ICON="out/image/icon/AoiHana.ico"
+  ICON="static/image/icon/AoiHana.ico"
   #ICON="" 
 elif [ "$PLATFORM" = "darwin" ]; then
-  ICON="out/image/icon/AoiHana.icns"
+  ICON="static/image/icon/AoiHana.icns"
 else
-  ICON="out/image/icon/icon.png"
+  ICON="static/image/icon/icon.png"
 fi
 
 # 注意，这里文件名不能用中文，否则windows编译不能加icon，因为rcedit不认识中文。。。
-electron-packager . "AoiHana" --platform=$PLATFORM --arch=$ARCH --version=$VERSION --icon=$ICON --overwrite --out=./dist --ignore="(dist|scripts)" --asar=true
-#asar表示OSX编译出的app里Contents/Resources/app目录是否打包成一个app.asar文件，防止源码泄露
+electron-packager . "AoiHana" --platform=$PLATFORM --arch=$ARCH --version=$VERSION --icon=$ICON --overwrite --out=./dist --ignore="(dist|scripts|browser)" --prune --asar=true
+#asar表示OSX编译出的app里Contents/Resources/app目录是否打包成一个app.asar文件 prune表示不打包devDependencies
 
 if [ $? -eq 0 ]; then
   echo -e "Packaging for $PLATFORM $ARCH succeeded.\n"
