@@ -2,7 +2,7 @@ angular.module('aoiHana')
     .config(function($stateProvider, $urlRouterProvider) {
         //
         // For any unmatched url, redirect to /state1
-        $urlRouterProvider.otherwise("/blank");
+        $urlRouterProvider.otherwise("/people");
         //
         // Now set up the states
         $stateProvider

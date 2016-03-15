@@ -15,6 +15,7 @@
   ],
   "dependencies": {
     "angular-material": "latest",
-    "angular-ui-router": "latest"
+    "angular-ui-router": "latest",
+    "mdi": "latest"
   }
 }

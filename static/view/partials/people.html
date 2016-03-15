@@ -1,9 +1,21 @@
 <div flex layout="row" ng-controller="PeopleController as pl">
     <md-sidenav md-is-locked-open="true" class="md-whiteframe-z2">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <md-button class="md-raised" aria-label="add" ng-click="pl.addPeople()">
+                    <i class="mdi mdi-account-plus"></i>                    
+                    新增人物
+                </md-button>
+                <md-button class="md-raised" aria-label="remove" ng-click="pl.removePeople()">
+                    <i class="mdi mdi-account-remove"></i>
+                    删除人物
+                </md-button>
+            </div>
+        </md-toolbar>
         <md-list>
             <md-list-item ng-repeat="p in pl.peoples">
                 <md-button ng-click="pl.selectPeople(p)" ng-class="{'selected' : p === pl.selected}">
-                    <md-icon md-svg-src="{{p.avatar}}" class="avatar"></md-icon>
+                    <!--<md-icon md-svg-src="{{p.avatar}}" class="avatar"></md-icon>-->
                     {{p.name}}
                 </md-button>
             </md-list-item>
@@ -11,8 +23,8 @@
     </md-sidenav>
 
     <md-content flex id="content">
-        <md-icon md-svg-icon="{{pl.selected.avatar}}" class="avatar"></md-icon>
+        <!--<md-icon md-svg-icon="{{pl.selected.avatar}}" class="avatar"></md-icon>-->
         <h2>{{pl.selected.name}}</h2>
-        <p>{{pl.selected.content}}</p>
+        <!--<p>{{pl.selected.content}}</p>-->
     </md-content>
 </div>

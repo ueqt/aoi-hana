@@ -7,6 +7,12 @@ module.exports = angular.module( 'aoiHana', [
     $logProvider.debugEnabled( true );
 })
 
+// 还是webfont方式方便，何必这样用
+// .config(function($mdIconProvider) {
+//   $mdIconProvider
+//     .defaultIconSet('../image/mdi.svg') // https://materialdesignicons.com
+// });
+
 ;
 
 require('./services');

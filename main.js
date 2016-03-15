@@ -5,6 +5,8 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const ipcMain = electron.ipcMain;
 
+var menu = require('./app/menu');
+
 const WINDOW_TITLE = '历史人物族谱';
 
 require('electron-debug')({
@@ -22,15 +24,16 @@ function createWindow() {
         height: 600,
         resizable: true,
         center: true,
-        frame: true,
-        autoHideMenuBar: true,
+        //frame: true,
+        //autoHideMenuBar: true,
         icon: 'assets/icon.jpg',
-        'accept-first-mouse': true,
+        //'accept-first-mouse': true,
         title: WINDOW_TITLE,
         show: false         
     });
     
-    mainWindow.loadURL('file://' + __dirname + '/static/view/index.html');
+    menu.createMenu(mainWindow);   
+    mainWindow.loadURL('file://' + __dirname + '/static/view/index.html');       
 
     // Open the DevTools.
     //mainWindow.webContents.openDevTools();
@@ -45,6 +48,7 @@ function createWindow() {
         // when you should delete the corresponding element.
         mainWindow = null;
     });
+                 
 }
 
 // This method will be called when Electron has finished
@@ -67,3 +71,5 @@ app.on('activate', function () {
         createWindow();
     }
 });
+
+require('./app/apis');

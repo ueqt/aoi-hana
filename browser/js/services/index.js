@@ -1,1 +1,2 @@
-require('./PeopleService.js');
+require('./IpcService');
+require('./PeopleService');

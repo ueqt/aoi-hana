@@ -1,4 +1,18 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+const electronRequire = require;
+const electron = electronRequire( 'electron' );
+const ipcRenderer = electron.ipcRenderer;
+
+angular.module('aoiHana')
+    .run(['$state', function($state) {
+  
+    ipcRenderer.on('people', function (arg) {
+        $state.go('people');
+    });
+    
+}]);
+
+},{}],2:[function(require,module,exports){
 (function(){
   'use strict';
   
@@ -47,7 +61,7 @@
   }
 
 })();
-},{}],2:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 (function(){
   'use strict';
   
@@ -62,9 +76,6 @@
 
     self.selected     = null;
     self.peoples        = [ ];
-    self.selectPeople   = selectPeople;
-
-    // Load all registered users
 
     peopleService
         .loadAllPeoples()
@@ -73,22 +84,41 @@
           self.selected = peoples[0];
         });
 
-     function selectPeople (people) {
+     self.selectPeople = function (people) {
        self.selected =  people;
+     }
+     
+     self.addPeople = function () {
+        peopleService
+            .addPeople()
+            .then(function(peoples) {
+            self.peoples = [].concat(peoples);
+            self.selected = peoples[0];
+            });                  
+     }
+     
+     self.removePeople = function () {
+         peopleService
+            .removePeople()
+            .then(function(peoples) {
+            self.peoples = [].concat(peoples);
+            self.selected = peoples[0];
+            });           
      }
 
   }
 
 })();
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 require('./MainController');
 require('./PeopleController');
-},{"./MainController":1,"./PeopleController":2}],4:[function(require,module,exports){
+},{"./MainController":2,"./PeopleController":3}],5:[function(require,module,exports){
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 require('./main');
 require('./routes');
-},{"./main":6,"./routes":7}],6:[function(require,module,exports){
+require('./apis');
+},{"./apis":1,"./main":7,"./routes":8}],7:[function(require,module,exports){
 module.exports = angular.module( 'aoiHana', [
     'ngMaterial',
     'ui.router'
@@ -98,17 +128,23 @@ module.exports = angular.module( 'aoiHana', [
     $logProvider.debugEnabled( true );
 })
 
+// 还是webfont方式方便，何必这样用
+// .config(function($mdIconProvider) {
+//   $mdIconProvider
+//     .defaultIconSet('../image/mdi.svg') // https://materialdesignicons.com
+// });
+
 ;
 
 require('./services');
 require('./controllers');
 require('./directives');
-},{"./controllers":3,"./directives":4,"./services":9}],7:[function(require,module,exports){
+},{"./controllers":4,"./directives":5,"./services":11}],8:[function(require,module,exports){
 angular.module('aoiHana')
     .config(function($stateProvider, $urlRouterProvider) {
         //
         // For any unmatched url, redirect to /state1
-        $urlRouterProvider.otherwise("/blank");
+        $urlRouterProvider.otherwise("/people");
         //
         // Now set up the states
         $stateProvider
@@ -121,55 +157,59 @@ angular.module('aoiHana')
             templateUrl: "partials/people.html"        
     });
 });
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 (function(){
   'use strict';
 
-  angular.module('aoiHana')
-    .service('peopleService', [ '$q', PeopleService ]);
+  const electronRequire = require;
+  const electron = electronRequire( 'electron' );
+  const ipcRenderer = electron.ipcRenderer;
 
-    function PeopleService($q) {
-        var peoples = [
-        {
-            name: 'Lia Lugo',
-            avatar: 'svg-1',
-            content: 'I love cheese, especially airedale queso. Cheese and biscuits halloumi cauliflower cheese cottage cheese swiss boursin fondue caerphilly. Cow port-salut camembert de normandie macaroni cheese feta who moved my cheese babybel boursin. Red leicester roquefort boursin squirty cheese jarlsberg blue castello caerphilly chalk and cheese. Lancashire.'
-        },
-        {
-            name: 'George Duke',
-            avatar: 'svg-2',
-            content: 'Zombie ipsum reversus ab viral inferno, nam rick grimes malum cerebro. De carne lumbering animata corpora quaeritis. Summus brains sit​​, morbo vel maleficia? De apocalypsi gorger omero undead survivor dictum mauris.'
-        },
-        {
-            name: 'Gener Delosreyes',
-            avatar: 'svg-3',
-            content: "Raw denim pour-over readymade Etsy Pitchfork. Four dollar toast pickled locavore bitters McSweeney's blog. Try-hard art party Shoreditch selfies. Odd Future butcher VHS, disrupt pop-up Thundercats chillwave vinyl jean shorts taxidermy master cleanse letterpress Wes Anderson mustache Helvetica. Schlitz bicycle rights chillwave irony lumberhungry Kickstarter next level sriracha typewriter Intelligentsia, migas kogi heirloom tousled. Disrupt 3 wolf moon lomo four loko. Pug mlkshk fanny pack literally hoodie bespoke, put a bird on it Marfa messenger bag kogi VHS."
-        },
-        {
-            name: 'Lawrence Ray',
-            avatar: 'svg-4',
-            content: 'Scratch the furniture spit up on light gray carpet instead of adjacent linoleum so eat a plant, kill a hand pelt around the house and up and down stairs chasing phantoms run in circles, or claw drapes. Always hungry pelt around the house and up and down stairs chasing phantoms.'
-        },
-        {
-            name: 'Ernesto Urbina',
-            avatar: 'svg-5',
-            content: 'Webtwo ipsum dolor sit amet, eskobo chumby doostang bebo. Bubbli greplin stypi prezi mzinga heroku wakoopa, shopify airbnb dogster dopplr gooru jumo, reddit plickers edmodo stypi zillow etsy.'
-        },
-        {
-            name: 'Gani Ferrer',
-            avatar: 'svg-6',
-            content: "Lebowski ipsum yeah? What do you think happens when you get rad? You turn in your library card? Get a new driver's license? Stop being awesome? Dolor sit amet, consectetur adipiscing elit praesent ac magna justo pellentesque ac lectus. You don't go out and make a living dressed like that in the middle of a weekday. Quis elit blandit fringilla a ut turpis praesent felis ligula, malesuada suscipit malesuada."
-        }
-        ];
-        
+  angular.module('aoiHana')
+    .service('ipcService', [ IpcService ]);
+
+    function IpcService() {
+
         return {
             loadAllPeoples: function() {
-                return $q.when(peoples);
-            }  
+                return ipcRenderer.sendSync('loadAllPeoples', {});
+            }, 
+            addPeople: function() {
+                return ipcRenderer.sendSync('addPeople', {});
+            }, 
+            removePeople: function() {
+                return ipcRenderer.sendSync('removePeople', {});
+            }
         };
     }      
 
 })();
-},{}],9:[function(require,module,exports){
-require('./PeopleService.js');
-},{"./PeopleService.js":8}]},{},[5]);
+},{}],10:[function(require,module,exports){
+(function(){
+  'use strict';
+
+  angular.module('aoiHana')
+    .service('peopleService', [ '$q', 'ipcService', PeopleService ]);
+
+    function PeopleService($q, ipcService) {
+        
+        return {
+            loadAllPeoples: function () {
+                return $q.when(ipcService.loadAllPeoples());
+            },
+            
+            addPeople: function () {
+                return $q.when(ipcService.addPeople());
+            },  
+            
+            removePeople: function () {
+                return $q.when(ipcService.removePeople());
+            }
+        };
+    }    
+
+})();
+},{}],11:[function(require,module,exports){
+require('./IpcService');
+require('./PeopleService');
+},{"./IpcService":9,"./PeopleService":10}]},{},[6]);

@@ -12,9 +12,6 @@
 
     self.selected     = null;
     self.peoples        = [ ];
-    self.selectPeople   = selectPeople;
-
-    // Load all registered users
 
     peopleService
         .loadAllPeoples()
@@ -23,8 +20,26 @@
           self.selected = peoples[0];
         });
 
-     function selectPeople (people) {
+     self.selectPeople = function (people) {
        self.selected =  people;
+     }
+     
+     self.addPeople = function () {
+        peopleService
+            .addPeople()
+            .then(function(peoples) {
+            self.peoples = [].concat(peoples);
+            self.selected = peoples[0];
+            });                  
+     }
+     
+     self.removePeople = function () {
+         peopleService
+            .removePeople()
+            .then(function(peoples) {
+            self.peoples = [].concat(peoples);
+            self.selected = peoples[0];
+            });           
      }
 
   }

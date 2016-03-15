@@ -1,9 +1,9 @@
 {
-  "name": "aoi-hana",  
+  "name": "aoi-hana",
   "version": "0.1.1",
   "description": "A history of human",
   "main": "main.js",
-  "scripts": {    
+  "scripts": {
     "start": "npm run build:js && npm run build:css && electron main.js --debug=5858 --enable-logging 2>&1 | silence-chromium",
     "build:css": "stylus -u nib browser/css/app.styl -o static/css/app.css",
     "build:js": "browserify browser/js/entry.js -o static/js/bundle.js",
@@ -37,14 +37,17 @@
     "url": "https://github.com/ueqt/aoi-hana/issues"
   },
   "homepage": "https://github.com/ueqt/aoi-hana#readme",
+  "dependencies": {
+    "electron-debug": "latest",
+    "nedb": "latest"
+  },
   "devDependencies": {
     "browserify": "latest",
-    "electron-debug": "latest",
     "electron-packager": "latest",
     "electron-prebuilt": "latest",
     "nib": "latest",
     "silence-chromium": "latest",
     "stylus": "latest",
-    "uglifyjs": "latest"      
+    "uglifyjs": "latest"
   }
 }
