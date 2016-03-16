@@ -11,12 +11,16 @@
                 return $q.when(ipcService.loadAllPeoples());
             },
             
-            addPeople: function () {
-                return $q.when(ipcService.addPeople());
+            addPeople: function (people) {
+                return $q.when(ipcService.addPeople(people));
             },  
             
-            removePeople: function () {
-                return $q.when(ipcService.removePeople());
+            editPeople: function (people) {
+                return $q.when(ipcService.editPeople(people));
+            },  
+            
+            removePeople: function (people) {
+                return $q.when(ipcService.removePeople(people));
             }
         };
     }    

@@ -16,6 +16,7 @@
   "dependencies": {
     "angular-material": "latest",
     "angular-ui-router": "latest",
-    "mdi": "latest"
+    "mdi": "latest",
+    "angular-messages": "latest"
   }
 }

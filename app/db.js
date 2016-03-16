@@ -8,14 +8,24 @@ var dbManager = {
         db.find({}, callback);
     },
     
-    addPeople: function(callback) {
-        db.insert({ name: '张飞' }, function (err, newDoc) {   
+    addPeople: function(people, callback) {
+        db.insert(people, function (err, newDoc) {   
             db.find({}, callback);
         });
     },
     
-    removePeople: function(callback) {
-        db.remove({ name: '张飞' }, { multi: true }, function (err, numRemoved) {
+    editPeople: function(people, callback) {
+        var id = people._id;
+        delete people['$$hashKey'];
+        delete people['_id'];
+        console.log(people);
+        db.update({ _id: id }, people, {}, function (err, newDoc) {   
+            db.find({}, callback);
+        });
+    },
+    
+    removePeople: function(people, callback) {
+        db.remove({ _id: people._id }, { multi: true }, function (err, numRemoved) {
             db.find({}, callback);
         });
     }

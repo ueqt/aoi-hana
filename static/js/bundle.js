@@ -67,16 +67,16 @@ angular.module('aoiHana')
   
   angular.module('aoiHana')
        .controller('PeopleController', [
-          'peopleService', '$mdSidenav', '$mdBottomSheet', '$log',
+          'peopleService', '$mdDialog',
           PeopleController
        ]);
 
-  function PeopleController( peopleService ) {
+  function PeopleController(peopleService, $mdDialog) {
     var self = this;
 
     self.selected     = null;
     self.peoples        = [ ];
-
+    
     peopleService
         .loadAllPeoples()
         .then(function(peoples) {
@@ -88,25 +88,79 @@ angular.module('aoiHana')
        self.selected =  people;
      }
      
-     self.addPeople = function () {
-        peopleService
-            .addPeople()
-            .then(function(peoples) {
-            self.peoples = [].concat(peoples);
-            self.selected = peoples[0];
-            });                  
-     }
-     
      self.removePeople = function () {
-         peopleService
-            .removePeople()
-            .then(function(peoples) {
-            self.peoples = [].concat(peoples);
-            self.selected = peoples[0];
-            });           
+         if(self.selected) {         
+            peopleService
+                .removePeople(self.selected)
+                .then(function(peoples) {
+                self.peoples = [].concat(peoples);
+                self.selected = peoples[0];
+                });           
+         }
      }
 
+     self.showEditPeopleDialog = function(ev) {
+        $mdDialog.show({
+            controller: EditPeopleController,
+            templateUrl: '../view/partials/editPeople.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            locals: {
+              people: self.selected  
+            },
+            clickOutsideToClose: false
+            })
+            .then(function(result) {
+                self.peoples = [].concat(result.peoples);
+                self.selected = result.selected;            
+            }, function() {                
+            });
+    };
+
   }
+  
+  function EditPeopleController($scope, $mdDialog, peopleService, people) {
+      
+        var old = people;
+      
+        $scope.sexs = ['男', '女'];
+        $scope.showHints = true;
+      
+        if(!people) {
+            $scope.people =  {
+                sex: '男'
+            };
+        } else {
+            $scope.people = JSON.parse(JSON.stringify(people)); // 深复制一个
+        }
+      
+        $scope.hide = function() {
+            $mdDialog.hide();
+        };
+        $scope.cancel = function() {
+            $mdDialog.cancel();
+        };
+        
+        $scope.save = function() {
+            if(!angular.equals($scope.people, old)) {
+                if(old == undefined) {
+                    peopleService
+                        .addPeople($scope.people)
+                        .then(function(peoples) {
+                            $mdDialog.hide({peoples: peoples, selected: $scope.people}); // TODO:这里selected要从peoples里选
+                        });              
+                } else {
+                    peopleService
+                        .editPeople($scope.people)
+                        .then(function(peoples) {
+                            $mdDialog.hide({peoples: peoples, selected: $scope.people}); // TODO:这里selected要从peoples里选
+                        }); 
+                }
+            } else {
+                $mdDialog.cancel();
+            }
+        };
+    }
 
 })();
 },{}],4:[function(require,module,exports){
@@ -121,6 +175,7 @@ require('./apis');
 },{"./apis":1,"./main":7,"./routes":8}],7:[function(require,module,exports){
 module.exports = angular.module( 'aoiHana', [
     'ngMaterial',
+    'ngMessages',
     'ui.router'
     ])
 
@@ -174,11 +229,14 @@ angular.module('aoiHana')
             loadAllPeoples: function() {
                 return ipcRenderer.sendSync('loadAllPeoples', {});
             }, 
-            addPeople: function() {
-                return ipcRenderer.sendSync('addPeople', {});
+            addPeople: function(people) {
+                return ipcRenderer.sendSync('addPeople', { people: people });
             }, 
-            removePeople: function() {
-                return ipcRenderer.sendSync('removePeople', {});
+            editPeople: function(people) {
+                return ipcRenderer.sendSync('editPeople', { people: people });
+            },             
+            removePeople: function(people) {
+                return ipcRenderer.sendSync('removePeople', { people: people });
             }
         };
     }      
@@ -198,12 +256,16 @@ angular.module('aoiHana')
                 return $q.when(ipcService.loadAllPeoples());
             },
             
-            addPeople: function () {
-                return $q.when(ipcService.addPeople());
+            addPeople: function (people) {
+                return $q.when(ipcService.addPeople(people));
             },  
             
-            removePeople: function () {
-                return $q.when(ipcService.removePeople());
+            editPeople: function (people) {
+                return $q.when(ipcService.editPeople(people));
+            },  
+            
+            removePeople: function (people) {
+                return $q.when(ipcService.removePeople(people));
             }
         };
     }    

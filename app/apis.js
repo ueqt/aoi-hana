@@ -11,13 +11,19 @@ ipcMain.on('loadAllPeoples', function(event, arg) {
 });
 
 ipcMain.on('addPeople', function(event, arg) {
-    db.addPeople(function(err, docs) {         
+    db.addPeople(arg.people, function(err, docs) {         
+        event.returnValue = docs;
+    });        
+});
+
+ipcMain.on('editPeople', function(event, arg) {
+    db.editPeople(arg.people, function(err, docs) {         
         event.returnValue = docs;
     });        
 });
 
 ipcMain.on('removePeople', function(event, arg) {
-    db.removePeople(function(err, docs) {         
+    db.removePeople(arg.people, function(err, docs) {         
         event.returnValue = docs;
     });        
 });

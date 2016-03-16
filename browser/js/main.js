@@ -1,5 +1,6 @@
 module.exports = angular.module( 'aoiHana', [
     'ngMaterial',
+    'ngMessages',
     'ui.router'
     ])
 

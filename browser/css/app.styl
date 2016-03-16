@@ -1,15 +1,151 @@
 
-.menuBarMain .page-container {
-  padding: 32px; }
-.menuBarMain .page {
-  margin: 0 auto;
-  padding: 24px;
-  max-width: 680px;
-  box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.25); }
-.menuBarMain .page h1 {
-  text-align: center;
-  font-size: 1.8rem;
-  margin-top: 0;
-  font-weight: normal; }
-.menuBarMain .page p {
-  line-height: 1.6rem; }
+html
+body
+  height: 100%
+  margin: 0px
+  padding: 0px
+
+/* Toolbar area */
+
+.menu 
+  background-color: transparent
+  border: none
+  height: 38px
+  margin: 16px
+  width: 36px
+
+md-toolbar h3 
+  margin: auto
+  font-weight: 500
+
+/* Sidenav area */
+
+md-list-item > button
+  width:100%
+  text-align:left !important
+
+.md-button.selected
+  background-color: #03a9f4  
+  
+.boy
+  color: green;
+
+.girl
+  color: pink;
+  
+.guess
+  color: grey;
+
+md-sidenav  md-list
+  padding: 0px 0px 8px 0px  
+
+/* Primary content area */
+
+#content
+  overflow: hidden
+
+#content 
+  padding-left: 40px
+  padding-right: 40px
+  padding-top: 5px
+
+#content md-icon.avatar
+  margin-top: 10px
+
+#content .md-button.share > md-icon
+  fill:black
+  width:36px
+  height:36px
+
+md-button.menuBtn > md-icon
+  fill:white
+  width:24px
+  height:24px
+
+#content .md-button.share:active > md-icon
+  background-color: #dadada
+  border-radius: 75%
+  padding:4px
+  transition: all 100ms ease-out 30ms
+
+#content img
+  display: block
+  height: auto
+  max-width: 500px
+
+/* Utils */
+
+.content-wrapper
+  position: relative
+
+/* Typography support coming in 0.8.0 */
+
+md-toolbar h1
+  font-size: 1.250em
+  font-weight: 400
+
+.avatar
+  position: relative
+  width: 128px
+  height: 128px
+  border: 1px solid #ddd
+  border-radius: 50%
+  display: inline-block
+  overflow: hidden
+  margin: 0px
+  vertical-align: middle
+  zoom:0.70
+  transform: translateZ(0)
+  -webkit-transform: scale(0.70)
+  -moz-transform:scale(0.70)
+
+md-bottom-sheet  md-ico
+  margin-right:20px
+
+span.name
+  font-weight: bold
+  font-size:1.1em
+  padding-left:5px
+
+.menuBarMain .page-container
+  padding: 32px
+  
+.menuBarMain .page
+  margin: 0 auto
+  padding: 24px
+  max-width: 680px
+  box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.25)
+  
+.menuBarMain .page h1
+  text-align: center
+  font-size: 1.8rem
+  margin-top: 0
+  font-weight: normal
+  
+.menuBarMain .page p
+  line-height: 1.6rem
+  
+.hint
+    /* Position the hint */
+    position: absolute
+    left: 2px
+    right: auto
+    bottom: 7px
+    /* Copy styles from ng-messages */
+    font-size: 12px
+    line-height: 14px
+    transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2)
+    /* Set our own color */
+    color: grey
+    
+.hint.ng-hide,
+.hint.ng-enter,
+.hint.ng-leave.ng-leave-active
+    bottom: 26px
+    opacity: 0
+    
+.hint.ng-leave,
+.hint.ng-enter.ng-enter-active
+    bottom: 7px
+    opacity: 1
+     

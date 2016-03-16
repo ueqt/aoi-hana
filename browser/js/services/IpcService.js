@@ -14,11 +14,14 @@
             loadAllPeoples: function() {
                 return ipcRenderer.sendSync('loadAllPeoples', {});
             }, 
-            addPeople: function() {
-                return ipcRenderer.sendSync('addPeople', {});
+            addPeople: function(people) {
+                return ipcRenderer.sendSync('addPeople', { people: people });
             }, 
-            removePeople: function() {
-                return ipcRenderer.sendSync('removePeople', {});
+            editPeople: function(people) {
+                return ipcRenderer.sendSync('editPeople', { people: people });
+            },             
+            removePeople: function(people) {
+                return ipcRenderer.sendSync('removePeople', { people: people });
             }
         };
     }      

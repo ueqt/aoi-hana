@@ -2,13 +2,17 @@
     <md-sidenav md-is-locked-open="true" class="md-whiteframe-z2">
         <md-toolbar>
             <div class="md-toolbar-tools">
-                <md-button class="md-raised" aria-label="add" ng-click="pl.addPeople()">
-                    <i class="mdi mdi-account-plus"></i>                    
-                    新增人物
+                <md-button class="md-icon-button" aria-label="新增人物" ng-click="pl.selected = undefined;pl.showEditPeopleDialog()">
+                    <i class="mdi mdi-account-plus" aria-label="新增人物"></i>     
+                    <md-tooltip>新增人物</md-tooltip>                                   
                 </md-button>
-                <md-button class="md-raised" aria-label="remove" ng-click="pl.removePeople()">
-                    <i class="mdi mdi-account-remove"></i>
-                    删除人物
+               <md-button class="md-icon-button" aria-label="编辑人物" ng-click="pl.showEditPeopleDialog()" ng-disabled="!pl.selected">
+                    <i class="mdi mdi-account-switch" aria-label="编辑人物"></i>  
+                    <md-tooltip>编辑人物</md-tooltip>                                             
+                </md-button>
+                <md-button class="md-icon-button" aria-label="删除人物" ng-click="pl.removePeople()" ng-disabled="!pl.selected">
+                    <i class="mdi mdi-account-remove" aria-label="删除人物"></i>  
+                    <md-tooltip>删除人物</md-tooltip>                         
                 </md-button>
             </div>
         </md-toolbar>
@@ -16,7 +20,8 @@
             <md-list-item ng-repeat="p in pl.peoples">
                 <md-button ng-click="pl.selectPeople(p)" ng-class="{'selected' : p === pl.selected}">
                     <!--<md-icon md-svg-src="{{p.avatar}}" class="avatar"></md-icon>-->
-                    {{p.name}}
+                    <span ng-class="{'boy': p.sex == '男', 'girl': p.sex == '女'}">{{p.firstName}} {{p.lastName}}</span><br/>
+                    <span ng-class="{'guess': p.birthYearGuess}">{{p.birthYear}}</span> 到 <span ng-class="{'guess': p.deathYearGuess}">{{p.deathYear}}</span>
                 </md-button>
             </md-list-item>
         </md-list>    
@@ -24,7 +29,7 @@
 
     <md-content flex id="content">
         <!--<md-icon md-svg-icon="{{pl.selected.avatar}}" class="avatar"></md-icon>-->
-        <h2>{{pl.selected.name}}</h2>
+        <h2>{{pl.selected.firstName}} {{pl.selected.lastName}}</h2>
         <!--<p>{{pl.selected.content}}</p>-->
     </md-content>
 </div>
