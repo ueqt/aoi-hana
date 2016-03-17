@@ -18,10 +18,8 @@
         </md-toolbar>
         <md-list>
             <md-list-item ng-repeat="p in pl.peoples">
-                <md-button ng-click="pl.selectPeople(p)" ng-class="{'selected' : p === pl.selected}">
-                    <!--<md-icon md-svg-src="{{p.avatar}}" class="avatar"></md-icon>-->
-                    <span ng-class="{'boy': p.sex == '男', 'girl': p.sex == '女'}">{{p.firstName}} {{p.lastName}}</span><br/>
-                    <span ng-class="{'guess': p.birthYearGuess}">{{p.birthYear}}</span> 到 <span ng-class="{'guess': p.deathYearGuess}">{{p.deathYear}}</span>
+                <md-button ng-click="pl.selectPeople(p)" ng-class="{'selected' : p === pl.selected}" aria-label="{{p.firstName}}{{p.lastName}}">
+                    <people-info people="p"></people-info>
                 </md-button>
             </md-list-item>
         </md-list>    

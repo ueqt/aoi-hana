@@ -1,5 +1,13 @@
+# dependencies
 node_modules
 bower_components
-npm-debug.log
-debug.log
-/dist
+
+# logs
+logs
+*.log
+npm-debug.log*
+
+# output
+dist
+static/css
+static/js

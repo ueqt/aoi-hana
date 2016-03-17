@@ -17,6 +17,26 @@ angular.module('aoiHana')
   'use strict';
   
   angular.module('aoiHana')
+       .component('peopleInfo', {
+      templateUrl: '../view/partials/peopleInfo.html',
+      controller: PeopleInfoController,
+      bindings: {
+          people: '='
+      }         
+    });
+    
+  function PeopleInfoController() {    
+
+  }  
+
+})();
+},{}],3:[function(require,module,exports){
+require('./PeopleInfo');
+},{"./PeopleInfo":2}],4:[function(require,module,exports){
+(function(){
+  'use strict';
+  
+  angular.module('aoiHana')
         .filter('keyboardShortcut', function($window) {
             return function(str) {
             if (!str) return;
@@ -61,7 +81,7 @@ angular.module('aoiHana')
   }
 
 })();
-},{}],3:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 (function(){
   'use strict';
   
@@ -163,16 +183,14 @@ angular.module('aoiHana')
     }
 
 })();
-},{}],4:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 require('./MainController');
 require('./PeopleController');
-},{"./MainController":2,"./PeopleController":3}],5:[function(require,module,exports){
-
-},{}],6:[function(require,module,exports){
+},{"./MainController":4,"./PeopleController":5}],7:[function(require,module,exports){
 require('./main');
 require('./routes');
 require('./apis');
-},{"./apis":1,"./main":7,"./routes":8}],7:[function(require,module,exports){
+},{"./apis":1,"./main":8,"./routes":9}],8:[function(require,module,exports){
 module.exports = angular.module( 'aoiHana', [
     'ngMaterial',
     'ngMessages',
@@ -193,8 +211,8 @@ module.exports = angular.module( 'aoiHana', [
 
 require('./services');
 require('./controllers');
-require('./directives');
-},{"./controllers":4,"./directives":5,"./services":11}],8:[function(require,module,exports){
+require('./components');
+},{"./components":3,"./controllers":6,"./services":12}],9:[function(require,module,exports){
 angular.module('aoiHana')
     .config(function($stateProvider, $urlRouterProvider) {
         //
@@ -212,7 +230,7 @@ angular.module('aoiHana')
             templateUrl: "partials/people.html"        
     });
 });
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 (function(){
   'use strict';
 
@@ -242,7 +260,7 @@ angular.module('aoiHana')
     }      
 
 })();
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 (function(){
   'use strict';
 
@@ -271,7 +289,7 @@ angular.module('aoiHana')
     }    
 
 })();
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 require('./IpcService');
 require('./PeopleService');
-},{"./IpcService":9,"./PeopleService":10}]},{},[6]);
+},{"./IpcService":10,"./PeopleService":11}]},{},[7]);

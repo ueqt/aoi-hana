@@ -18,4 +18,4 @@ module.exports = angular.module( 'aoiHana', [
 
 require('./services');
 require('./controllers');
-require('./directives');
+require('./components');
