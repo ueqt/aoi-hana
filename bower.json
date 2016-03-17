@@ -17,6 +17,10 @@
     "angular-material": "latest",
     "angular-ui-router": "latest",
     "mdi": "latest",
-    "angular-messages": "latest"
+    "angular-messages": "latest",
+    "lodash": "latest"
+  },
+  "resolutions": {
+    "angular": "latest"
   }
 }

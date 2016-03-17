@@ -1,3 +1,3 @@
 <!--<md-icon md-svg-src="{{p.avatar}}" class="avatar"></md-icon>-->
 <span ng-class="{'boy': $ctrl.people.sex == '男', 'girl': $ctrl.people.sex == '女'}">{{$ctrl.people.firstName}} {{$ctrl.people.lastName}}  {{$ctrl.people.wordName}}</span><br/>
-<span ng-class="{'guess': $ctrl.people.birthYearGuess}">{{$ctrl.people.birthYear}}</span>  到  <span ng-class="{'guess': $ctrl.people.deathYearGuess}">{{$ctrl.people.deathYear}}</span>
+<span ng-class="{'guess': $ctrl.people.birthYearGuess}" ng-if="!checkEmptyString($ctrl.people.birthYear)">生于{{$ctrl.people.birthYear}}</span>  <span ng-class="{'guess': $ctrl.people.deathYearGuess}" ng-if="!checkEmptyString($ctrl.people.deathYear)">卒于{{$ctrl.people.deathYear}}</span>

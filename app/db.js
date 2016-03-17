@@ -16,9 +16,25 @@ var dbManager = {
     
     editPeople: function(people, callback) {
         var id = people._id;
-        delete people['$$hashKey'];
-        delete people['_id'];
-        console.log(people);
+        
+        // 去除所有的$$hashKey, 否则无法保存
+        var json = JSON.stringify(people, function( key, value ) {
+            if( key === "$$hashKey" ) {
+                return undefined;
+            }
+
+            return value;
+        });
+        
+        people = JSON.parse(json);
+        
+        //delete people['$$hashKey'];
+        delete people['_id'];      
+        // if(people.relations != undefined) {
+        //     for(var i=0;i<people.relations.length;i++) {
+        //         delete people.relations[i]['$$hashKey'];
+        //     }
+        // }        
         db.update({ _id: id }, people, {}, function (err, newDoc) {   
             db.find({}, callback);
         });

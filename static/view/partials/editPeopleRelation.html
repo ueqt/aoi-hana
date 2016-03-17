@@ -1,0 +1,55 @@
+ <md-content layout-padding>     
+     <md-button class="md-raised md-primary" ng-click="addRelation()">新增关系</md-button>
+     <div flex ng-cloak>
+         <md-grid-list
+            md-cols="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="6"
+            md-row-height-gt-md="1:1" md-row-height="4:5"
+            md-gutter="8px" md-gutter-gt-sm="4px" >
+            <md-grid-tile ng-repeat="r in people.relations" flex>                        
+                <md-card>
+                    <md-card-title>
+                        <md-card-title-text>
+                             <form name="editPeopleForm.relationForm" ng-submit="$event.preventDefault()">
+                                <md-autocomplete 
+                                    required="true"
+                                    name="who"
+                                    md-input-name="who"
+                                    ng-disabled="false"
+                                    md-no-cache="false"
+                                    md-selected-item="r.who"
+                                    md-search-text-change="rs.searchTextChange(r.searchText)"
+                                    md-search-text="r.searchText"
+                                    md-selected-item-change="rs.selectedItemChange(item)"
+                                    md-items="item in rs.querySearch(r.searchText)"
+                                    md-item-text="showPeopleName(getPeople(item))"
+                                    md-min-length="0"
+                                    placeholder="输入人名并选择"
+                                    md-menu-class="autocomplete-custom-template">
+                                    <md-item-template>
+                                        <people-info people="getPeople(item)"></people-info>
+                                    </md-item-template>
+                                    <div ng-messages="editPeopleForm.relationForm.who.$error">
+                                        <div ng-message="required">和谁发生的关系？</div>
+                                    </div>
+                                </md-autocomplete>                                 
+                                <people-info required people="getPeople(r.who)"></people-info></br>  
+                                <input type="hidden" required ng-model="r.who" /> <!-- 校验是否选对了人 -->
+                                <md-input-container>
+                                    <label>关系</label>
+                                    <input md-maxlength="30" required name="type" ng-model="r.type" />                                
+                                    <div ng-messages="editPeopleForm.relationForm.type.$error">
+                                        <div ng-message="required">他是{{people.firstName}}{{people.lastName}}的什么人？</div>
+                                        <div ng-message="md-maxlength">有超过30个字符的关系么？</div>
+                                    </div>
+                                </md-input-container>    
+                             </form>                                                  
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-actions layout="row" layout-align="end center">                        
+                        <md-button class="md-raised md-primary" ng-click="removeRelation($index)">删除</md-button>
+                    </md-card-actions>
+                </md-card>                  
+            </md-grid-tile>       
+         </md-grid-list>
+     </div>
+ </md-content>

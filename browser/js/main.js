@@ -8,6 +8,12 @@ module.exports = angular.module( 'aoiHana', [
     $logProvider.debugEnabled( true );
 })
 
+// 加载lodash
+.constant('_', window._)
+.run(function ($rootScope) {
+    $rootScope._ = window._;
+});
+
 // 还是webfont方式方便，何必这样用
 // .config(function($mdIconProvider) {
 //   $mdIconProvider

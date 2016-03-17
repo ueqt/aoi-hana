@@ -1,3 +1,3 @@
-{"birthYear":"199","deathYear":"221","deathYearGuess":true,"firstName":"关","lastName":"羽","sex":"男","wordName":"云长","_id":"e4u2VMevmKzTIwof"}
+{"birthYear":"199","deathYear":"222","deathYearGuess":true,"firstName":"关","lastName":"羽","relations":[{"searchText":"张飞翼徳","type":"义兄弟","who":"p51Ycj00jCUB2o3y"},{"searchText":"刘备玄德","type":"义兄弟","who":"jUgHuVXTwoqzPtaZ"}],"sex":"男","wordName":"云长","_id":"e4u2VMevmKzTIwof"}
 {"birthYear":"123","deathYear":"1313","firstName":"刘","lastName":"备","sex":"男","wordName":"玄德","_id":"jUgHuVXTwoqzPtaZ"}
 {"birthYear":"198","birthYearGuess":true,"deathYear":"204","firstName":"张","lastName":"飞","sex":"男","wordName":"翼徳","_id":"p51Ycj00jCUB2o3y"}

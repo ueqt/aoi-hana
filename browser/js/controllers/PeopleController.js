@@ -42,7 +42,8 @@
             parent: angular.element(document.body),
             targetEvent: ev,
             locals: {
-              people: self.selected  
+                peoples: self.peoples,
+                people: self.selected  
             },
             clickOutsideToClose: false
             })
@@ -52,15 +53,19 @@
             }, function() {                
             });
     };
+   
 
   }
   
-  function EditPeopleController($scope, $mdDialog, peopleService, people) {
+  function EditPeopleController($scope, $mdDialog, peopleService, peoples, people) {
       
         var old = people;
       
         $scope.sexs = ['男', '女'];
         $scope.showHints = true;
+        // http://stackoverflow.com/questions/15818431/how-can-i-check-an-ng-included-forms-validity-from-the-parent-scope
+        // 因为ngInclude的form无法从外面访问，所以用这个变通的方法就能访问了
+        $scope.editPeopleForm = {};
       
         if(!people) {
             $scope.people =  {
@@ -77,8 +82,53 @@
             $mdDialog.cancel();
         };
         
+        $scope.getPeople = function (id) {
+            return _.find(peoples, {'_id': id});
+        }
+        
+        $scope.showPeopleName = function (p) {
+            if(p.wordName) {
+                return p.firstName + p.lastName + p.wordName;
+            } else {
+                return p.firstName + p.lastName;
+            }
+        }
+        
+        $scope.rs = {            
+            searchTextChange: function searchTextChange(text) {
+                //$log.info('Text changed to ' + text);
+            },
+            selectedItemChange: function selectedItemChange(item) {
+                //$log.info('Item changed to ' + JSON.stringify(item));
+            },
+            querySearch: function querySearch (query) {
+                var results = _.filter(peoples, function(o) {
+                    return $scope.showPeopleName(o).indexOf(query) > -1;
+                });
+                
+                return _.map(results, function(o) {
+                   return o._id; 
+                });
+            }
+        };
+    
+        $scope.addRelation = function () {
+            if(!$scope.people.relations) {
+                $scope.people.relations = [];
+            }
+            $scope.people.relations.push({
+                who: '',
+                type: ''            
+            });
+        };
+        
+        $scope.removeRelation = function(index) {  
+            // TODO:这里有一个小bug，如果新建了两个关系，然后删了一个，保存按钮会认为可以保存，其实校验是不通过的
+            $scope.people.relations.splice(index, 1);            
+        };
+        
         $scope.save = function() {
-            if(!angular.equals($scope.people, old)) {
+            if(!angular.equals($scope.people, old)) {                                
                 if(old == undefined) {
                     peopleService
                         .addPeople($scope.people)

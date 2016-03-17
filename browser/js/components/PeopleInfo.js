@@ -10,8 +10,16 @@
       }         
     });
     
-  function PeopleInfoController() {    
-
+  function PeopleInfoController($scope) {    
+    $scope.checkEmptyString = function(str) {
+      if(str == undefined) {
+          return true;
+      }  
+      if(str.length == 0) {
+          return true;
+      }
+      return false;
+    };
   }  
 
 })();

@@ -12,97 +12,7 @@
       <md-tabs md-dynamic-height md-border-bottom>
         <md-tab label="基本信息">
           <md-content class="md-padding">         
-                <md-switch layout-align="end center" ng-model="showHints">显示{{showHints ? "提示" : "错误"}}</md-switch>   
-<div layout="column" ng-cloak class="md-inline-form">
-  <md-content layout-padding>
-    <form name="peopleForm">
-       <md-content layout-gt-sm="row" layout-padding>
-            <md-input-container class="md-block" flex="300">
-                <label>姓</label>
-                <input md-maxlength="30" required name="firstName" ng-model="people.firstName" />
-                <div class="hint" ng-if="showHints">自古以来，姓是一族的荣耀</div>
-                <div ng-messages="peopleForm.firstName.$error" ng-if="!showHints">
-                    <div ng-message="required">没有姓的人是悲哀的</div>
-                    <div ng-message="md-maxlength">有超过30个字符的姓么？</div>
-                </div>
-            </md-input-container>
-            <div flex="5" hide-xs hide-sm>
-            <!-- Spacer //-->
-            </div>
-            <md-input-container class="md-block" flex="300">
-                <label>名</label>
-                <input md-maxlength="30" required name="lastName" ng-model="people.lastName" />
-                <div class="hint" ng-if="showHints">名字是人类的标签</div>
-                <div ng-messages="peopleForm.lastName.$error" ng-if="!showHints">
-                    <div ng-message="required">无名氏？</div>
-                    <div ng-message="md-maxlength">有超过30个字符的名么？</div>
-                </div>
-            </md-input-container>
-            <div flex="5" hide-xs hide-sm>
-            <!-- Spacer //-->
-            </div>
-            <md-input-container class="md-block" flex="300">
-                <label>字</label>
-                <input md-maxlength="30" name="wordName" ng-model="people.wordName" />
-                <div class="hint" ng-if="showHints">字是古人的象征</div>
-                <div ng-messages="peopleForm.wordName.$error" ng-if="!showHints">            
-                    <div ng-message="md-maxlength">有超过30个字符的字么？</div>
-                </div>
-            </md-input-container>
-       </md-content>
-       <md-content layout-gt-sm="row" layout-padding>
-            <md-input-container class="md-block" flex="300">
-                <label>性别</label>
-                <md-select ng-model="people.sex" required>
-                    <md-option ng-repeat="sex in sexs" value="{{sex}}">
-                    {{sex}}
-                    </md-option>
-                </md-select>
-                <div class="hint" ng-show="showHints">性别你懂的</div>
-                <div ng-messages="peopleForm.sex.$error" ng-if="!showHints">
-                    <div ng-message="required">无性？orz,据说宫廷里正在抓人呢</div>
-                </div>
-            </md-input-container>
-            <div flex="5" hide-xs hide-sm>
-            <!-- Spacer //-->
-            </div>
-            <div layout="row" flex="300">
-                <md-input-container class="md-block">
-                    <label>生年</label>
-                    <input name="birthYear" ng-model="people.birthYear" ng-pattern="/^[-]{0,1}[0-9]{1,4}$/" />
-                    <div class="hint" ng-show="showHints">公元后就直接输入数字，公元前加-号</div>
-                    <div ng-messages="peopleForm.birthYear.$error" ng-hide="showHints">
-                        <div ng-message="pattern">年份无效，请输入-9999到9999</div>
-                    </div>
-                </md-input-container>
-                <md-input-container class="md-block">
-                    <md-checkbox ng-model="people.birthYearGuess" aria-label="生年是推测的">
-                            推测
-                    </md-checkbox>
-                </md-input-container>
-            </div>
-            <div flex="5" hide-xs hide-sm>
-            <!-- Spacer //-->
-            </div>
-            <div layout="row" flex="300">
-                <md-input-container class="md-block">
-                    <label>卒年</label>        
-                    <input name="deathYear" ng-model="people.deathYear" ng-pattern="/^[-]{0,1}[0-9]{1,4}$/" />
-                    <div class="hint" ng-show="showHints">公元后就直接输入数字，公元前加-号</div>
-                    <div ng-messages="peopleForm.deathyear.$error" ng-hide="showHints">
-                        <div ng-message="pattern">年份无效，请输入-9999到9999</div>
-                    </div>          
-                </md-input-container>
-                <md-input-container class="md-block">
-                    <md-checkbox ng-model="people.deathYearGuess" aria-label="卒年是推测的">
-                        推测
-                    </md-checkbox>  
-                </md-input-container>
-             </div>
-       </md-content>
-    </form>
-  </md-content>
-</div>
+            <div ng-include="'partials/editPeopleBasic.html'"></div>
           </md-content>
         </md-tab>
         <md-tab label="生平事迹">
@@ -113,15 +23,14 @@
         </md-tab>
         <md-tab label="关系人物">
           <md-content class="md-padding">
-            <h1 class="md-display-2">关系人物</h1>
-            <p></p>
+            <div ng-include="'partials/editPeopleRelation.html'"></div>
           </md-content>
         </md-tab>
       </md-tabs>
     </md-dialog-content>
     <md-dialog-actions layout="row">
-      <span flex></span>
-      <md-button class="md-button md-primary" ng-disabled="peopleForm.$invalid" ng-click="save()" style="margin-right:20px;" >
+      <span flex></span>      
+      <md-button class="md-button md-primary" ng-disabled="editPeopleForm.peopleForm.$invalid || editPeopleForm.relationForm.$invalid" ng-click="save()" style="margin-right:20px;" >
         保存
       </md-button>
     </md-dialog-actions>
