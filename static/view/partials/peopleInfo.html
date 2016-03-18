@@ -1,3 +1,11 @@
-<!--<md-icon md-svg-src="{{p.avatar}}" class="avatar"></md-icon>-->
-<span ng-class="{'boy': $ctrl.people.sex == '男', 'girl': $ctrl.people.sex == '女'}">{{$ctrl.people.firstName}} {{$ctrl.people.lastName}}  {{$ctrl.people.wordName}}</span><br/>
-<span ng-class="{'guess': $ctrl.people.birthYearGuess}" ng-if="!checkEmptyString($ctrl.people.birthYear)">生于{{$ctrl.people.birthYear}}</span>  <span ng-class="{'guess': $ctrl.people.deathYearGuess}" ng-if="!checkEmptyString($ctrl.people.deathYear)">卒于{{$ctrl.people.deathYear}}</span>
+<div layout="row" class="info-card" layout-align="center center">
+    <div flex="50"><img ng-src="../image/head/{{$ctrl.people.avatar || 'default'}}.png" class="avatar" /></div>
+    <div flex="50" layout="column" layout-align="center center">
+        <div flex="60">
+            <span class="md-body-2" ng-class="{'boy': $ctrl.people.sex == '男', 'girl': $ctrl.people.sex == '女'}">{{$ctrl.people.firstName}} {{$ctrl.people.lastName}}  {{$ctrl.people.wordName}}</span>
+        </div>
+        <div flex-padding>
+            <span class="md-caption" ng-class="{'guess': $ctrl.people.birthYearGuess}" ng-if="!checkEmptyString($ctrl.people.birthYear)">生{{$ctrl.people.birthYear}}</span>  <span class="md-caption" ng-class="{'guess': $ctrl.people.deathYearGuess}" ng-if="!checkEmptyString($ctrl.people.deathYear)">卒{{$ctrl.people.deathYear}}</span>
+        </div>        
+    </div>    
+</div>

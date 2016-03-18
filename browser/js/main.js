@@ -12,7 +12,7 @@ module.exports = angular.module( 'aoiHana', [
 .constant('_', window._)
 .run(function ($rootScope) {
     $rootScope._ = window._;
-});
+})
 
 // 还是webfont方式方便，何必这样用
 // .config(function($mdIconProvider) {

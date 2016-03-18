@@ -3,8 +3,9 @@
      <div flex ng-cloak>
          <md-grid-list
             md-cols="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="6"
-            md-row-height-gt-md="1:1" md-row-height="4:5"
-            md-gutter="8px" md-gutter-gt-sm="4px" >
+            md-row-height-gt-md="1:1" md-row-height="4:6"
+            md-gutter="2px" md-gutter-gt-sm="1px" >
+            <!-- 卡片加了内容后，如果高度不够了，调整md-row-height冒号后面的数字，加大即可 -->
             <md-grid-tile ng-repeat="r in people.relations" flex>                        
                 <md-card>
                     <md-card-title>

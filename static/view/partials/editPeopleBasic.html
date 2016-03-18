@@ -86,6 +86,26 @@
                 </md-input-container>
              </div>
        </md-content>
+            <md-content layout-gt-sm="row" layout-padding>
+            <md-input-container class="md-block" flex="300">
+                <label>头像id</label>
+                <input md-maxlength="30" name="avatar" ng-model="people.avatar" />
+                <div class="hint" ng-if="showHints">头像是人的门户</div>
+                <div ng-messages="editPeopleForm.peopleForm.avatar.$error" ng-if="!showHints">                    
+                    <div ng-message="md-maxlength">头像id就别超过30个字符了吧</div>
+                </div>
+            </md-input-container>
+            <div flex="5" hide-xs hide-sm>
+            <!-- Spacer //-->
+            </div>
+            <md-input-container class="md-block" flex="300">               
+            </md-input-container>
+            <div flex="5" hide-xs hide-sm>
+            <!-- Spacer //-->
+            </div>
+            <md-input-container class="md-block" flex="300">               
+            </md-input-container>
+       </md-content>
     </form>
   </md-content>
 </div>
