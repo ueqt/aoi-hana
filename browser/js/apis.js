@@ -5,8 +5,12 @@ const ipcRenderer = electron.ipcRenderer;
 angular.module('aoiHana')
     .run(['$state', function($state) {
   
-    ipcRenderer.on('people', function (arg) {
-        $state.go('people');
+    ipcRenderer.on('people', function (event, arg) {
+        if(arg == 'show') {
+            $state.go('people'); 
+        } else if(arg == 'relation') {
+            $state.go('relationchart');
+        }
     });
     
 }]);

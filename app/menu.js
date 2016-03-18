@@ -39,6 +39,13 @@ function createMenu(mainWindow) {
             accelerator: 'CmdOrCtrl+F',
             click: function(item, focusedWindow) {
                 mainWindow.webContents.send('people', 'show');
+            }            
+        },
+        {
+            label: '人物关系图',
+            accelerator: 'CmdOrCtrl+L',
+            click: function(item, focusedWindow) {
+                mainWindow.webContents.send('people', 'relation');
             }
         }
         ]

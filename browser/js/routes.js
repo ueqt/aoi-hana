@@ -12,6 +12,11 @@ angular.module('aoiHana')
         })
         .state('people', {
             url: "/people",
-            templateUrl: "partials/people.html"        
-    });
+            templateUrl: "partials/people.html"                    
+        })
+        .state('relationchart', {
+            url: "/relationchart",
+            templateUrl: "partials/relationchart.html"                    
+        })      
+        ;
 });

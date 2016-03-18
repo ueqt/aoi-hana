@@ -27,6 +27,12 @@
                         <span class="md-alt-text"> {{ 'M-F' | keyboardShortcut }}</span>
                         </md-button>
                     </md-menu-item>
+                    <md-menu-item>
+                        <md-button ng-click="ctrl.routeAction('relationchart', $event)">
+                        人物关系图
+                        <span class="md-alt-text"> {{ 'M-L' | keyboardShortcut }}</span>
+                        </md-button>
+                    </md-menu-item>                    
                     <md-menu-divider></md-menu-divider>
                     <!--<md-menu-item>
                         <md-menu>
@@ -67,6 +73,8 @@
     <script src="../bower_components/angular-ui-router/release/angular-ui-router.js" type="text/javascript"></script>
     
     <script src="../bower_components/lodash/dist/lodash.js" type="text/javascript"></script>
+    
+    <script src="../bower_components/echarts/dist/echarts.js" type="text/javascript"></script>
 
     <!-- startup angular app -->
     <script src="../js/bundle.js"></script>

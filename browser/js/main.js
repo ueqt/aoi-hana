@@ -22,6 +22,7 @@ module.exports = angular.module( 'aoiHana', [
 
 ;
 
+require('./directives');
 require('./services');
 require('./controllers');
 require('./components');
