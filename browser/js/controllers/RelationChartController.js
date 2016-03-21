@@ -3,29 +3,115 @@
   
   angular.module('aoiHana')
        .controller('RelationChartController', [     
-          '$scope',       
+          '$scope', 'peopleService',      
           RelationChartController
        ]);
 
-  function RelationChartController($scope) {
-    $scope.option = {
-            title: {
-                text: 'ECharts 入门示例'
-            },
-            tooltip: {},
+  function RelationChartController($scope, peopleService) {
+      
+      peopleService
+        .loadAllPeoples()
+        .then(function(peoples) {
+            $scope.peoples = [].concat(peoples).map(function (node, idx) {
+                node.id = idx;
+                node.category = node.sex;
+                node.fullName = node.firstName + node.lastName;
+                node.symbolSize = (node.deathYear || 0) - (node.birthYear || 0); // 按年龄显示圆大小
+                if(node.symbolSize > 100) {
+                    node.symbolSize = 100;
+                }
+                if(node.symbolSize < 10) {
+                    node.symbolSize = 10;
+                }                
+                // 自定义图片 
+                node.symbol = 'image://../image/head/' + (node.avatar || 'default') + '.png';
+                node.itemStyle = {
+                    normal: {
+                        borderRadius: '50%'
+                    }
+                };            
+                return node;
+            });
+        
+            $scope.categories = [
+                {
+                    "name": "男",
+                    "keyword": {},
+                    "base": "男"
+                },
+                {
+                    "name": "女",
+                    "keyword": {},
+                    "base": "女"
+                }];
+                         
+            $scope.links = [];
+            for(var i=0;i<$scope.peoples.length;i++) {
+                var p = $scope.peoples[i];
+                if(p.relations) {
+                    for(var j=0;j<p.relations.length;j++) {
+                        var r = p.relations[j];
+                        // 寻找r的index
+                        var target = _.find($scope.peoples, {'_id': r.who});
+                        $scope.links.push({
+                            source: p.id,
+                            target: target.id,
+                            label: r.type
+                            // lineStyle: {
+                            //     symbol: 'arrow'  
+                            // }
+                        });
+                    }
+                }
+            }           
+        
+        $scope.option = {
             legend: {
-                data:['销量']
+                data: ['男', '女']
             },
-            xAxis: {
-                data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+            tooltip: {
+                formatter: function(params) {
+                    return (params.data.wordName || '') + 
+                    '(生:' + (params.data.birthYear || '') + 
+                    '  卒:' + (params.data.deathYear || '') + ')';
+                }
             },
-            yAxis: {},
             series: [{
-                name: '销量',
-                type: 'bar',
-                data: [5, 20, 36, 10, 10, 20]
+                type: 'graph',
+                layout: 'force',
+                animation: true,
+                roam: true,                
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'bottom',
+                        formatter: function(params) {
+                            if(params.data) {
+                                return params.data.fullName;
+                            } else {
+                                return '';
+                            }
+                        }                    
+                    }
+                },
+                draggable: true,                
+                data: $scope.peoples,
+                categories: $scope.categories,
+                force: {
+                    //initLayout: 'circular',
+                    //gravity: 10,                    
+                    edgeLength: 100,
+                    repulsion: 120
+                },
+                lineStyle: {
+                    normal: {                        
+                        curveness: 0.3
+                    }
+                },
+                links: $scope.links
             }]
-        };
-  }   
-
+        };          
+        });       
+  }
+    
 })();

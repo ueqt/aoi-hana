@@ -23,7 +23,7 @@
           var options = $scope.options;
           var elem0 = $element[0];
           angular.forEach(['width', 'height'], function(prop) {
-            if (options[prop]) {
+            if (options && options[prop]) {
               elem0.style[prop] = options[prop];
             }
           });
@@ -38,7 +38,7 @@
           
           // 这样可以支持echarts3
           $scope.$watch('options', function (option) {
-              if(options) {
+              if(option) {
                   chart.setOption(option);
               }
           })
