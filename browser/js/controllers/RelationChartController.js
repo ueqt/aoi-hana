@@ -14,6 +14,7 @@
         .then(function(peoples) {
             $scope.peoples = [].concat(peoples).map(function (node, idx) {
                 node.id = idx;
+                node.useType = 'node';
                 node.category = node.sex;
                 node.fullName = node.firstName + node.lastName;
                 node.symbolSize = (node.deathYear || 0) - (node.birthYear || 0); // 按年龄显示圆大小
@@ -53,14 +54,26 @@
                         var r = p.relations[j];
                         // 寻找r的index
                         var target = _.find($scope.peoples, {'_id': r.who});
-                        $scope.links.push({
+                        var link = {
                             source: p.id,
                             target: target.id,
-                            label: r.type
-                            // lineStyle: {
-                            //     symbol: 'arrow'  
+                            label: r.type,
+                            useType: 'link',
+                            // itemStyle: {
+                            //     normal: {
+                            //         lineType: 'dashed',
+                            //         strokeColor: 'red',
+                            //         text: '文字',
+                            //         textPosition: 'inside'
+                            //     }
                             // }
-                        });
+                            lineStyle: {
+                                normal: {
+                                    symbol: 'arrow'
+                                }  
+                            }
+                        };                        
+                        $scope.links.push(link);
                     }
                 }
             }           
@@ -71,9 +84,15 @@
             },
             tooltip: {
                 formatter: function(params) {
-                    return (params.data.wordName || '') + 
-                    '(生:' + (params.data.birthYear || '') + 
-                    '  卒:' + (params.data.deathYear || '') + ')';
+                    if(params.data.useType == 'node') {
+                        return (params.data.wordName || '') + 
+                        '(生:' + (params.data.birthYear || '') + 
+                        '  卒:' + (params.data.deathYear || '') + ')';
+                    } else if(params.data.useType == 'link') {
+                        return params.data.label;
+                    } else {
+                        return '';
+                    }                    
                 }
             },
             series: [{
@@ -101,7 +120,7 @@
                     //initLayout: 'circular',
                     //gravity: 10,                    
                     edgeLength: 100,
-                    repulsion: 120
+                    repulsion: 600
                 },
                 // itemStyle: {
                 //     normal: {
@@ -113,7 +132,7 @@
                 //     }  
                 // },
                 lineStyle: {
-                    normal: {                        
+                    normal: {                                                
                         curveness: 0.3
                     }
                 },
