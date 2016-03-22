@@ -3,12 +3,12 @@
   
   angular.module('aoiHana')
        .controller('PeopleController', [
-          'peopleService', '$mdDialog',
+          '$rootScope', 'peopleService', '$mdDialog',
           PeopleController
        ]);
 
-  function PeopleController(peopleService, $mdDialog) {
-    var self = this;
+  function PeopleController($rootScope, peopleService, $mdDialog) {
+    var self = this;       
 
     self.selected     = null;
     self.peoples        = [ ];
@@ -52,8 +52,12 @@
                 self.selected = result.selected;            
             }, function() {                
             });
-    };
-   
+    };     
+    
+    $rootScope.$on('showEditPeopleDialog', function(event, msg) {
+        self.selected = _.find(self.peoples, {'_id': msg._id});;        
+        self.showEditPeopleDialog(undefined);
+    });
 
   }
   

@@ -3,11 +3,11 @@
   
   angular.module('aoiHana')
        .controller('RelationChartController', [     
-          '$scope', 'peopleService',      
+          '$scope', '$rootScope', 'peopleService',      
           RelationChartController
        ]);
 
-  function RelationChartController($scope, peopleService) {
+  function RelationChartController($scope, $rootScope, peopleService) {
       
       peopleService
         .loadAllPeoples()
@@ -24,7 +24,7 @@
                     node.symbolSize = 10;
                 }                
                 // 自定义图片 
-                node.symbol = 'image://../image/head/' + (node.avatar || 'default') + '.png';
+                node.symbol = 'image://../image/head/' + (node.avatar || 'default') + '.png';                              
                 node.itemStyle = {
                     normal: {
                         borderRadius: '50%'
@@ -103,6 +103,15 @@
                     edgeLength: 100,
                     repulsion: 120
                 },
+                // itemStyle: {
+                //     normal: {
+                //         nodeStyle: {
+                //             brushType: 'both',
+                //             strokeColor: 'rgba(255,215,0,0.4)',
+                //             lineWidth: 8
+                //         }
+                //     }  
+                // },
                 lineStyle: {
                     normal: {                        
                         curveness: 0.3
@@ -111,7 +120,11 @@
                 links: $scope.links
             }]
         };          
-        });       
+        });  
+        
+        $scope.editPeople = function(option, data) {
+            $rootScope.$broadcast('showEditPeopleDialog', data);
+        }       
   }
     
 })();

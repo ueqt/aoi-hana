@@ -15,7 +15,9 @@
       template: '<div style="width: 1000px;height:600px;"></div>',
       replace: true /* tag will be replaced as div, otherwise echart cannot find a container to stay. */,
       scope: {
-        options: '='//,
+        options: '=',
+        click: '=onClick',
+        doubleClick: '=onDoubleClick'
         // data: '='
       },
       controller: ['$scope', '$element',
@@ -42,6 +44,29 @@
                   chart.setOption(option);
               }
           })
+          
+          // 定义事件
+          if($scope.click) {
+              chart.on('click', function (param) {
+                var option = chart.getOption();
+                var data = param.data;
+                // 判断节点的相关数据是否正确
+                if (data != null && data != undefined) {
+                    $scope.click(option, data);
+                }
+              });
+          }
+          
+          if($scope.doubleClick) {
+              chart.on('dblclick', function (param) {
+                var option = chart.getOption();
+                var data = param.data;
+                // 判断节点的相关数据是否正确
+                if (data != null && data != undefined) {
+                    $scope.doubleClick(option, data);
+                }
+              });
+          }
           
           // 下面是echarts2的
         //  chart.setOption(options, /*overwrite=*/true);
