@@ -32,7 +32,7 @@ else
 fi
 
 # 注意，这里文件名不能用中文，否则windows编译不能加icon，因为rcedit不认识中文。。。
-electron-packager . "AoiHana" --platform=$PLATFORM --arch=$ARCH --version=$VERSION --icon=$ICON --overwrite --out=./dist --ignore="(/dist$|/scripts$|/browser$)" --prune #--asar=true
+electron-packager . "AoiHana" --platform=$PLATFORM --arch=$ARCH --version=$VERSION --icon=$ICON --overwrite --out=./dist --ignore="(^/dist$|^/scripts$|^/browser$)" --prune #--asar=true
 # /db$ 不压缩了，否则数据库无法写在app目录里。。。
 #asar表示OSX编译出的app里Contents/Resources/app目录是否打包成一个app.asar文件 prune表示不打包devDependencies
 
