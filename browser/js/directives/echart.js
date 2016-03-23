@@ -12,7 +12,13 @@
            
     return {
       restrict: 'E',
-      template: '<div style="width: 1000px;height:600px;"></div>',
+    //   template: '<div style="width: {{width}}px;height:{{height}}px;"></div>',
+      compile: function(element, attrs) {
+        var width = attrs.width || 1000;
+        var height = attrs.height || 600;
+        var htmlText = '<div style="width: ' + width + 'px;height: ' + height + 'px;"></div>';
+        element.replaceWith(htmlText);
+      },
       replace: true /* tag will be replaced as div, otherwise echart cannot find a container to stay. */,
       scope: {
         options: '=',
@@ -31,7 +37,8 @@
           });
           var chart = echarts.init(elem0);
 
-          angular.element(window).on('resize', chart.resize);
+          angular.element(window).on('resize', chart.resize);         
+          
           $scope.$on('$destroy', function() {
             angular.element(window).off('resize', chart.resize);
             chart.dispose();

@@ -79,9 +79,9 @@
             }           
         
         $scope.option = {
-            legend: {
-                data: ['男', '女']
-            },
+            // legend: {
+            //     data: ['男', '女']
+            // },
             tooltip: {
                 formatter: function(params) {
                     if(params.data.useType == 'node') {
