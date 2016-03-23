@@ -12,6 +12,7 @@ addons:
 before_script:
 - npm install bower -g
 - bower install
+- npm run prebuild
 script:
 - "./scripts/build-all.sh"
 - "./scripts/tar-all.sh"

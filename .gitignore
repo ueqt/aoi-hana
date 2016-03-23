@@ -9,5 +9,5 @@ npm-debug.log*
 
 # output
 dist
-static/css
-static/js
+static/css/*.css
+static/js/*.js
