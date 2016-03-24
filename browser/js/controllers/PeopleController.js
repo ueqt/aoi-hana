@@ -3,15 +3,16 @@
   
   angular.module('aoiHana')
        .controller('PeopleController', [
-          '$rootScope', 'peopleService', '$mdDialog',
+          '$rootScope', 'peopleService', '$mdDialog', 'mapService',
           PeopleController
        ]);
 
-  function PeopleController($rootScope, peopleService, $mdDialog) {
+  function PeopleController($rootScope, peopleService, $mdDialog, mapService) {
     var self = this;       
 
     self.selected     = null;
     self.peoples        = [ ];
+    self.maps = mapService.allMaps;
     
     peopleService
         .loadAllPeoples()
@@ -33,7 +34,7 @@
                 self.selected = peoples[0];
                 });           
          }
-     }
+     }     
 
      self.showEditPeopleDialog = function(ev) {
         $mdDialog.show({
@@ -43,7 +44,8 @@
             targetEvent: ev,
             locals: {
                 peoples: self.peoples,
-                people: self.selected  
+                people: self.selected,
+                maps: self.maps  
             },
             clickOutsideToClose: false
             })
@@ -61,7 +63,7 @@
 
   }
   
-  function EditPeopleController($scope, $mdDialog, peopleService, peoples, people) {
+  function EditPeopleController($scope, $mdDialog, peopleService, peoples, people, maps) {
       
         var old = people;
       
@@ -115,6 +117,42 @@
                 });
             }
         };
+        
+        $scope.queryPlaceSearch = function (query, year) {
+            var results = _.filter(maps, function (o) {
+                return $scope.showPlaceName(o, year).indexOf(query) > -1;
+            });
+            
+            var temp = _.map(results, function(o) {
+                   return $scope.showPlaceName(o, year); 
+                });
+            
+            return temp;
+        }
+        
+        $scope.showPlaceName = function (p, year) {
+            if(p.古名 && year) {
+                return p['古名'](year) + '(今' + p['省份'] + p['地市'] + p['区县'] + ')';       
+            } else {
+                return p['省份'] + p['地市'] + p['区县'];
+            }            
+        }
+        
+        $scope.addHistory = function () {
+            if(!$scope.people.histories) {
+                $scope.people.histories = [];
+            }
+            $scope.people.histories.push({     
+                place: '',
+                year: $scope.people.birthYear,
+                thing: ''    
+            });
+        }
+        
+        $scope.removeHistory = function(his) {  
+            // TODO:这里有一个小bug，如果新建了两个履历，然后删了一个，保存按钮会认为可以保存，其实校验是不通过的
+            $scope.people.histories.splice($scope.people.histories.indexOf(his), 1);                  
+        };
     
         $scope.addRelation = function () {
             if(!$scope.people.relations) {
@@ -132,6 +170,11 @@
         };
         
         $scope.save = function() {
+            if($scope.people.histories) {
+                // 给履历按年份排序
+                $scope.people.histories = _.orderBy($scope.people.histories, ['year'], ['asc']);
+            }
+            
             if(!angular.equals($scope.people, old)) {                                
                 if(old == undefined) {
                     peopleService

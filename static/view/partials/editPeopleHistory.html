@@ -1,4 +1,65 @@
-<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-<div ng-controller="peopleHistoryChartController">
+ <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div ng-controller="peopleHistoryChartController" ng-if="people.histories">
     <echart options="option" width="750" height="300" />    
 </div>
+
+ <md-content layout-padding>     
+     <md-button class="md-raised md-primary" ng-click="addHistory()">新增历史</md-button>
+     <div flex ng-cloak>
+         <md-grid-list
+            md-cols="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="6"
+            md-row-height-gt-md="1:1" md-row-height="4:6"
+            md-gutter="2px" md-gutter-gt-sm="1px" >
+            <!-- 卡片加了内容后，如果高度不够了，调整md-row-height冒号后面的数字，加大即可 -->
+            <md-grid-tile ng-repeat="h in people.histories | orderBy: 'year': false" flex> 
+                <md-card>
+                    <md-card-title>
+                        <md-card-title-text>
+                             <form name="editPeopleForm.historyForm" ng-submit="$event.preventDefault()">
+                                <md-input-container>
+                                    <label>年份</label>
+                                    <input required name="year" ng-model="h.year" ng-pattern="/^[-]{0,1}[0-9]{1,4}$/" />
+                                    <div ng-messages="editPeopleForm.historyForm.year.$error">
+                                        <div ng-message="required">哪一年发生的事？</div>
+                                        <div ng-message="pattern">年份无效，请输入-9999到9999</div>
+                                    </div>
+                                </md-input-container>  
+                                <md-autocomplete 
+                                    required="true"
+                                    name="place"
+                                    md-input-name="place"
+                                    ng-disabled="false"
+                                    md-no-cache="false"
+                                    md-selected-item="h.place"
+                                    md-search-text="h.searchText"
+                                    md-items="item in queryPlaceSearch(h.searchText, h.year)"
+                                    md-item-text="showPlaceName(item, h.year)"
+                                    md-min-length="0"
+                                    placeholder="输入地名并选择">
+                                    <md-item-template>   
+                                        <span md-highlight-text="h.searchText" md-highlight-flags="^i" style="word-break:normal; width:auto; display:block; white-space:pre-wrap;word-wrap : break-word ;overflow: hidden ;">{{item}}</span>                                        
+                                    </md-item-template>
+                                    <div ng-messages="editPeopleForm.historyForm.place.$error">
+                                        <div ng-message="required">在哪里发生的事情？</div>
+                                    </div>
+                                </md-autocomplete>                                                                 
+                                <input type="hidden" required ng-model="h.place" /> <!-- 校验是否选对了地方 -->
+                                <md-input-container>
+                                    <label>事情</label>
+                                    <input required name="thing" ng-model="h.thing" />                                
+                                    <div ng-messages="editPeopleForm.historyForm.thing.$error">
+                                        <div ng-message="required">{{people.firstName}}{{people.lastName}}发生了什么事？</div>
+                                    </div>
+                                </md-input-container>    
+                             </form>                                                  
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-actions layout="row" layout-align="end center">                        
+                        <md-button class="md-raised md-primary" ng-click="removeHistory(h)">删除</md-button>
+                    </md-card-actions>
+                </md-card>                  
+            </md-grid-tile>       
+         </md-grid-list>
+     </div>
+ </md-content>
+ 

@@ -1,4 +1,4 @@
-<div flex layout="row" ng-controller="PeopleController as pl">
+<div flex layout="row" ng-controller="PeopleController as pl" class="full-height">
     <md-sidenav md-is-locked-open="true" class="md-whiteframe-z2">
         <md-toolbar>
             <div class="md-toolbar-tools">
@@ -16,13 +16,15 @@
                 </md-button>
             </div>
         </md-toolbar>
-        <md-list>
-            <md-list-item ng-repeat="p in pl.peoples">
-                <md-button ng-click="pl.selectPeople(p)" ng-class="{'selected' : p === pl.selected}" aria-label="{{p.firstName}}{{p.lastName}}">
-                    <people-info people="p"></people-info>
-                </md-button>
-            </md-list-item>
-        </md-list>    
+        <md-content class="full-height">
+            <md-list>
+                <md-list-item ng-repeat="p in pl.peoples">
+                    <md-button ng-click="pl.selectPeople(p)" ng-class="{'selected' : p === pl.selected}" aria-label="{{p.firstName}}{{p.lastName}}">
+                        <people-info people="p"></people-info>
+                    </md-button>
+                </md-list-item>
+            </md-list>    
+        </md-content>
     </md-sidenav>
 
     <md-content flex id="content">

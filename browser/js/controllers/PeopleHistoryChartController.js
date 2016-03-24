@@ -3,84 +3,79 @@
   
   angular.module('aoiHana')
        .controller('peopleHistoryChartController', [     
-          '$scope', '$rootScope', 'peopleService',      
+          '$scope', '$rootScope', 'peopleService', 'mapService',     
           PeopleHistoryChartController
        ]);
 
-  function PeopleHistoryChartController($scope, $rootScope, peopleService) {
+  function PeopleHistoryChartController($scope, $rootScope, peopleService, mapService) {
       
       $scope.people = $scope.$parent.$parent.people;
       
-      var fromYear = $scope.people.birthYear;
-      var endYear = $scope.people.deathYear;
-      
-      if(!fromYear && !endYear) {
-          // 如果两个都没有
-          fromYear = new Date().getFullYear();
-          endYear = fromYear;
-      } else if(!fromYear) {
-          // 没有生年
-          fromYear = endYear - 120;
-      } else if(!endYear) {
-          // 没有卒年
-          endYear = fromYear + 120;
-      }
-      
       var timelineDatas = [];
       var subOptions = [];
-      for(var i=fromYear;i<=endYear;i++) {
-          if(i==fromYear) {
-              timelineDatas.push({
-                    value: fromYear,
-                    tooltip: {
-                        formatter: function (params) {
-                            return '生命的开始';
-                        }
-                    },
-                    symbol: 'diamond',
-                    symbolSize: 16
-                });
-          } else if(i==endYear) {
+      var maps = mapService.allMaps;
+      
+        $scope.showPlaceName = function (p, year) {
+            if(p.古名 && year) {
+                return p['古名'](year) + '(今' + p['省份'] + p['地市'] + p['区县'] + ')';       
+            } else {
+                return p['省份'] + p['地市'] + p['区县'];
+            }            
+        }
+      
+      if($scope.people.histories) {
+      
+        for(var i=0;i<$scope.people.histories.length;i++) {
+            var his = $scope.people.histories[i];         
             timelineDatas.push({
-                    value: endYear,
+                    value: his.year,
                     tooltip: {
                         formatter: function (params) {
-                            return '生命的终点';
+                            return 'his.thing';
                         }
                     },
-                    symbol: 'diamond',
+                    symbol: 'diamond',                    
                     symbolSize: 16
-                });
-          } else {
-              //timelineDatas.push(i);
-          }
-          
-          if(i==fromYear || i == endYear) {
-            subOptions.push({
-               title: {
-                   text: i + '年'
-               },
-               series: {
-                   name: '中国',
-                        type: 'map',
-                        mapType: 'china',
-                        selectedMode : 'multiple',
-                        roam: true,
-                        label: {
-                            normal: {
-                                show: true
-                            },
-                            emphasis: {
-                                show: true
+                });            
+            
+            var place = _.find(maps, function (p) {
+                return $scope.showPlaceName(p, his.year) == his.place;
+            });
+            
+           subOptions.push({
+                title: {
+                    text: his.year + '年 在' + ' ' + his.place + ' ' + his.thing
+                },              
+                series: {
+                    name: '中国',
+                    type: 'scatter',
+                    coordinateSystem: 'geo',                    
+                    label: {
+                        normal: {                            
+                            show: true,
+                            formatter: '{b}',
+                            textStyle: {
+                                color: '#5B00AE'
                             }
                         },
-                        data:[
-                            {name:'上海', selected:true}
-                        ]
-               } 
+                        emphasis: {
+                            show: true
+                        }
+                    },
+                    // tooltip: {
+                    //     formatter: function (params) {
+                    //         return params.data.place;
+                    //     }
+                    // },    
+                    symbol: 'image://../image/head/' + ($scope.people.avatar || 'default') + '.png',
+                    symbolSize: 30,
+                    data:[
+                        {name: his.place, value: [place['经度'], place['纬度']]}
+                    ]
+                } 
             });
-          }
-      }         
+         }            
+      } 
 
         $scope.option = {
             baseOption: {
@@ -95,7 +90,7 @@
                     top: 20,
                     bottom: 20,
                     width: 55,
-                    height: null,   
+                    height: null,                       
                     data: timelineDatas,
                     // label: {
                     //     formatter : function(s) {
@@ -105,26 +100,28 @@
                 },
                 // title: {
                 //     subtext: ''
-                // },
-                tooltip: {},
-                // geo: {
-                //     map: 'china',
-                //     label: {
-                //         emphasis: {
-                //             show: false
-                //         }
-                //     },
-                //     roam: true,
-                //     itemStyle: {
-                //         normal: {
-                //             areaColor: '#323c48',
-                //             borderColor: '#404a59'
-                //         },
-                //         emphasis: {
-                //             areaColor: '#2a333d'
-                //         }
-                //     }
-                // },
+                // },                
+                geo: {
+                    map: 'china',
+                    label: {
+                        normal: {
+                            show: false
+                        },
+                        emphasis: {
+                            show: true
+                        }
+                    },
+                    roam: true,
+                    // itemStyle: {
+                    //     normal: {
+                    //         areaColor: '#323c48',
+                    //         borderColor: '#404a59'
+                    //     },
+                    //     emphasis: {
+                    //         areaColor: '#2a333d'
+                    //     }
+                    // }
+                },
                 series: [
                     // {
                     //     name: '中国',
