@@ -10,6 +10,8 @@ angular.module('aoiHana')
             $state.go('people'); 
         } else if(arg == 'relation') {
             $state.go('relationchart');
+        } else if(arg == 'history') {
+            $state.go('historychart');
         }
     });
     

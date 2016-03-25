@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <link href="../bower_components/angular-material/angular-material.css" rel="stylesheet" />
     <link href="../bower_components/mdi/css/materialdesignicons.min.css" media="all" rel="stylesheet" type="text/css" /> 
-    <link href="../css/app.css" rel="stylesheet" >      
+    <link href="../css/app.css" rel="stylesheet" >  
+    <title>历史人物族谱</title>    
   </head>
   <body ng-app="aoiHana" layout="column">         
     <div ng-controller="MainController as ctrl" ng-cloak>
@@ -32,7 +33,13 @@
                         人物关系图
                         <span class="md-alt-text"> {{ 'M-L' | keyboardShortcut }}</span>
                         </md-button>
-                    </md-menu-item>                    
+                    </md-menu-item>   
+                    <md-menu-item>
+                        <md-button ng-click="ctrl.routeAction('historychart', $event)">
+                        历史年表
+                        <span class="md-alt-text"> {{ 'M-H' | keyboardShortcut }}</span>
+                        </md-button>
+                    </md-menu-item>                                         
                     <md-menu-divider></md-menu-divider>
                     <!--<md-menu-item>
                         <md-menu>

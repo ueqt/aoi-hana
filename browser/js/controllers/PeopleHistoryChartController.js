@@ -29,11 +29,11 @@
             var his = $scope.people.histories[i];         
             timelineDatas.push({
                     value: his.year,
-                    tooltip: {
-                        formatter: function (params) {
-                            return 'his.thing';
-                        }
-                    },
+                    // tooltip: {
+                    //     formatter: function (params) {
+                    //         return 'his.thing';
+                    //     }
+                    // },
                     symbol: 'diamond',                    
                     symbolSize: 16
                 });            
@@ -64,13 +64,13 @@
                     },
                     // tooltip: {
                     //     formatter: function (params) {
-                    //         return params.data.place;
+                    //         return params.name;
                     //     }
                     // },    
                     symbol: 'image://../image/head/' + ($scope.people.avatar || 'default') + '.png',
                     symbolSize: 30,
                     data:[
-                        {name: his.place, value: [place['经度'], place['纬度']]}
+                        {name: his.place, value: [place['经度'] || 0, place['纬度'] || 0]}
                     ]
                 } 
             });

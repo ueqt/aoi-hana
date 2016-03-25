@@ -47,6 +47,13 @@ function createMenu(mainWindow) {
             click: function(item, focusedWindow) {
                 mainWindow.webContents.send('people', 'relation');
             }
+        },
+        {
+            label: '历史年表',
+            accelerator: 'CmdOrCtrl+H',
+            click: function(item, focusedWindow) {
+                mainWindow.webContents.send('people', 'history');
+            }
         }
         ]
     },

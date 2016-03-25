@@ -48,7 +48,8 @@
           // 这样可以支持echarts3
           $scope.$watch('options', function (option) {
               if(option) {
-                  chart.setOption(option);
+                  // 这里即使设置了notMerge还是没效果
+                  chart.setOption(option, true);
               }
           })
           

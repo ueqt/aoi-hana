@@ -17,6 +17,10 @@ angular.module('aoiHana')
         .state('relationchart', {
             url: "/relationchart",
             templateUrl: "partials/relationchart.html"                    
-        })      
+        })    
+        .state('historychart', {
+            url: "/historychart",
+            templateUrl: "partials/historychart.html"                    
+        })   
         ;
 });
