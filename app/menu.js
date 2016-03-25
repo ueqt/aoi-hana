@@ -50,7 +50,7 @@ function createMenu(mainWindow) {
         },
         {
             label: '历史年表',
-            accelerator: 'CmdOrCtrl+H',
+            accelerator: 'CmdOrCtrl+S',
             click: function(item, focusedWindow) {
                 mainWindow.webContents.send('people', 'history');
             }
