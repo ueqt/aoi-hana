@@ -13,6 +13,38 @@
     self.selected     = null;
     self.peoples        = [ ];
     self.maps = mapService.allMaps;
+    self.searchNameText = '';
+    self.nameReverse = false;
+    self.birthYearReverse = false;    
+    self.predicate = [(self.nameReverse ? '-' : '') + 'firstName', (self.nameReverse ? '-' : '') + 'lastName',      (self.birthYearReverse ? '-' : '') + 'birthYear'];    
+    
+    self.searchByName = function (text) {
+        return function(item) {
+            if(!text || text == '') {
+                return true;
+            }
+            var name = '';
+            if(item.wordName) {
+                name = item.firstName + item.lastName + item.wordName;
+            } else {
+                name = item.firstName + item.lastName;
+            }
+            if(name.indexOf(text) > -1) {
+                return true;
+            }
+            return false;
+        };
+    }
+    
+    self.orderByName = function() {
+        self.nameReverse = !self.nameReverse;
+        self.predicate = [(self.nameReverse ? '-' : '') + 'firstName', (self.nameReverse ? '-' : '') + 'lastName',      (self.birthYearReverse ? '-' : '') + 'birthYear'];   
+    }
+    
+    self.orderByBirthYear = function() {
+        self.birthYearReverse = !self.birthYearReverse;
+        self.predicate = [(self.birthYearReverse ? '-' : '') + 'birthYear', (self.nameReverse ? '-' : '') + 'firstName', (self.nameReverse ? '-' : '') + 'lastName'];    
+    }
     
     peopleService
         .loadAllPeoples()

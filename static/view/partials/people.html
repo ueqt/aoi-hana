@@ -14,11 +14,24 @@
                     <i class="mdi mdi-account-remove" aria-label="删除人物"></i>  
                     <md-tooltip>删除人物</md-tooltip>                         
                 </md-button>
+                <md-button class="md-icon-button" aria-label="按姓名排序" ng-click="pl.orderByName()">
+                    <i class="mdi mdi-sort-alphabetical" aria-label="按姓名排序"></i>  
+                    <md-tooltip>按姓名排序</md-tooltip>                         
+                </md-button>
+                <md-button class="md-icon-button" aria-label="按出生年排序" ng-click="pl.orderByBirthYear()">
+                    <i class="mdi mdi-sort" aria-label="按出生年排序"></i>  
+                    <md-tooltip>按出生年排序</md-tooltip>                         
+                </md-button>                                
             </div>
         </md-toolbar>
         <md-content class="full-height">
+            <md-input-container md-no-float class="md-block">
+                <md-icon class="mdi mdi-account-search" aria-label="查找姓名"></md-icon>  
+                <md-tooltip>查找姓名</md-tooltip> 
+                <input ng-model="pl.searchNameText" type="text" placeholder="查找姓名">                     
+            </md-input-container>   
             <md-list>
-                <md-list-item ng-repeat="p in pl.peoples">
+                <md-list-item ng-repeat="p in pl.peoples | filter:pl.searchByName(pl.searchNameText) | orderBy:pl.predicate">
                     <md-button ng-click="pl.selectPeople(p)" ng-class="{'selected' : p === pl.selected}" aria-label="{{p.firstName}}{{p.lastName}}">
                         <people-info people="p"></people-info>
                     </md-button>

@@ -73,6 +73,8 @@
                     }                    
                     if(samePlaceTooltip[yearData.history.place] != '') {
                         samePlaceTooltip[yearData.history.place] += '</br>'; 
+                    } else {
+                        samePlaceTooltip[yearData.history.place] += yearData.history.place + '</br>';
                     }
                     samePlaceTooltip[yearData.history.place] += '<img width="30" src="../image/head/' + (yearData.who.avatar || 'default') + '.png"></img>' + yearData.who.firstName + yearData.who.lastName + ' ' +   yearData.history.thing;                      
                 }
