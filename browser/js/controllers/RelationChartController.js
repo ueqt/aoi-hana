@@ -85,7 +85,7 @@
             tooltip: {
                 formatter: function(params) {
                     if(params.data.useType == 'node') {
-                        return (params.data.wordName || '') + 
+                        return params.data.firstName + params.data.lastName + (params.data.wordName || '') + 
                         '(生:' + (params.data.birthYear || '') + 
                         '  卒:' + (params.data.deathYear || '') + ')';
                     } else if(params.data.useType == 'link') {
