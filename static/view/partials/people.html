@@ -24,25 +24,27 @@
                 </md-button>                                
             </div>
         </md-toolbar>
-        <md-content class="full-height">
-            <md-input-container md-no-float class="md-block">
+        <!--<md-content class="full-height">-->
+        <md-content>            
+            <md-input-container md-no-float class="md-block">                                
                 <md-icon class="mdi mdi-account-search" aria-label="查找姓名"></md-icon>  
                 <md-tooltip>查找姓名</md-tooltip> 
+                {{results.length}} 人
                 <input ng-model="pl.searchNameText" type="text" placeholder="查找姓名">                     
-            </md-input-container>   
-            <md-list>
-                <md-list-item ng-repeat="p in pl.peoples | filter:pl.searchByName(pl.searchNameText) | orderBy:pl.predicate">
+            </md-input-container>     
+            <md-virtual-repeat-container style="margin-top:-44px;" ng-style="pl.listStyle"><!-- md-virtual-repeat不支持as写法 -->
+                <div md-virtual-repeat="p in results = (pl.peoples | filter:pl.searchByName(pl.searchNameText) | orderBy:pl.predicate)">                    
                     <md-button ng-click="pl.selectPeople(p)" ng-class="{'selected' : p === pl.selected}" aria-label="{{p.firstName}}{{p.lastName}}">
                         <people-info people="p"></people-info>
                     </md-button>
-                </md-list-item>
-            </md-list>    
+                </div>
+            </md-virtual-repeat-container>    
         </md-content>
     </md-sidenav>
 
     <md-content flex id="content">
         <!--<md-icon md-svg-icon="{{pl.selected.avatar}}" class="avatar"></md-icon>-->
-        <h2>{{pl.selected.firstName}} {{pl.selected.lastName}}</h2>    
+        <h2>{{pl.selected.firstName}} {{pl.selected.lastName}} {{pl.selected.wordName}}</h2>    
         <img ng-src="../image/head/{{pl.selected.avatar || 'default'}}.png" />    
         <!--<p>{{pl.selected._id}}</p>-->
     </md-content>

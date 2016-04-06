@@ -89,23 +89,16 @@
                 }
             }           
             
-            for(var i=minYear;i<=maxYear;i++) {        
-        
-                timelineDatas.push({
-                    value: i,
-                    // tooltip: {
-                    //     formatter: function (params) {
-                    //         return 'his.thing';
-                    //     }
-                    // },
-                    symbol: 'diamond',                    
-                    symbolSize: 16
-                }); 
+            for(var i=minYear;i<=maxYear;i++) {               
                 
                 var datas = JSON.parse(JSON.stringify(_.filter($scope.peoples, function(p) {  
                             return p.birthYear <=i && p.deathYear >=i;
-                        }))); // 深复制一下，否则年龄永远是固定的                     
-        
+                        }))); // 深复制一下，否则年龄永远是固定的      
+                        
+                if(datas.length <= 0) {
+                    continue;
+                }       
+
                 for(var j=0;j<datas.length;j++){                    
                    // 按实际年龄来显示
                    var p = datas[j];
@@ -142,6 +135,17 @@
                         }; 
                     }
                 }
+                                
+                timelineDatas.push({
+                    value: i,
+                    // tooltip: {
+                    //     formatter: function (params) {
+                    //         return 'his.thing';
+                    //     }
+                    // },
+                    symbol: 'diamond',                    
+                    symbolSize: 16
+                });                                                         
         
                 subOptions.push({
                     // legend: {

@@ -3,12 +3,22 @@
   
   angular.module('aoiHana')
        .controller('PeopleController', [
-          '$rootScope', 'peopleService', '$mdDialog', 'mapService',
+          '$scope', '$rootScope', 'peopleService', '$mdDialog', 'mapService', '$window',
           PeopleController
        ]);
 
-  function PeopleController($rootScope, peopleService, $mdDialog, mapService) {
-    var self = this;       
+  function PeopleController($scope, $rootScope, peopleService, $mdDialog, mapService, $window) {
+    var self = this;      
+
+    // https://github.com/angular/material/issues/4314
+    self.listStyle = {
+      height: ($window.innerHeight - 232) + 'px'
+    };
+    $window.addEventListener('resize', onResize);
+    function onResize() {
+      self.listStyle.height = ($window.innerHeight - 232) + 'px';
+      if(!$scope.$root.$$phase) $scope.$digest();
+    } 
 
     self.selected     = null;
     self.peoples        = [ ];
