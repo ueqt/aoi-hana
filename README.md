@@ -23,3 +23,14 @@ npm install && npm start
 git tag -a "v0.1.0" -m "test auto release from travis"
 git push origin master --tags
 ```
+
+## Solve electron-prebuilt postinstall error
+
+Ref https://github.com/electron-userland/electron-prebuilt/issues/69#issuecomment-164636460
+
+```bash
+rm -rf ~/.electron/
+rm -rf ~/.atom/
+npm cache clear
+npm install
+```

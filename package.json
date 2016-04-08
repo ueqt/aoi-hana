@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "browserify": "latest",
-    "electron-packager": "latest",
+    "electron-packager": "6.0.0",
     "electron-prebuilt": "latest",
     "nib": "latest",
     "silence-chromium": "latest",
