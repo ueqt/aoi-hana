@@ -11,7 +11,8 @@
             md-row-height-gt-md="1:1" md-row-height="4:6"
             md-gutter="2px" md-gutter-gt-sm="1px" >
             <!-- 卡片加了内容后，如果高度不够了，调整md-row-height冒号后面的数字，加大即可 -->
-            <md-grid-tile ng-repeat="h in people.histories | orderBy: 'year': false" flex> 
+            <!--<md-grid-tile ng-repeat="h in people.histories | orderBy: 'year': false" flex> -->
+            <md-grid-tile ng-repeat="h in people.histories" flex> 
                 <md-card>
                     <md-card-title>
                         <md-card-title-text>

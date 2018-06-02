@@ -92,6 +92,7 @@
                     width: 55,
                     height: null,                       
                     data: timelineDatas,
+                    type: 'number'
                     // label: {
                     //     formatter : function(s) {
                     //         return (new Date(s)).getFullYear();

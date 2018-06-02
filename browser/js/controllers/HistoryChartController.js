@@ -185,7 +185,8 @@
                         bottom: 20,
                         width: 55,
                         height: null,                                             
-                        data: timelineDatas
+                        data: timelineDatas,
+                        type: 'number'
                     },               
                     geo: {
                         map: 'china',

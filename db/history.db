@@ -235,6 +235,7 @@
 {"avatar":"蒯良","birthYear":"155","deathYear":"204","firstName":"蒯","lastName":"良","sex":"男","wordName":"子柔","_id":"LHDPlBqSiCNJUPmS"}
 {"avatar":"杨昂","birthYear":"172","deathYear":"215","firstName":"杨","lastName":"昂","sex":"男","_id":"LSdUts5aaWUjm3FY"}
 {"avatar":"陈应","birthYear":"172","deathYear":"208","firstName":"陈","lastName":"应","sex":"男","_id":"LV7oc1UWPEpLL3O1"}
+{"birthYear":"-522","birthYearGuess":true,"deathYear":"-482","firstName":"许","histories":[{"place":"河南省许昌市许昌市","searchText":"河南省许昌市许昌市","thing":"出生","year":"-522"},{"place":"河南省许昌市许昌市","searchText":"河南省许昌市许昌市","thing":"萅，三月，元公合刘公、晋定公、宋景公、蔡昭侯、卫灵公、陈惠公、郑献公、曺公、莒公、邾公、顿公、胡公、滕公、薛公、杞公、小邾公、齐国会於召陵，谋伐楚也。夏，六月，许迁於容城。","year":"-506"},{"place":"河南省许昌市许昌县","searchText":"河南省许昌市许昌县","thing":"萅，郑灭许，因楚败也。","year":"-504"},{"place":"河南省许昌市许昌市","searchText":"河南省许昌市许昌市","thing":"成为许国君主","year":"-503"},{"place":"河南省许昌市许昌市","searchText":"河南省许昌市许昌市","thing":"元公、楚昭王、陈湣公、随公围蔡。","year":"-494"},{"place":"河南省许昌市许昌市","searchText":"河南省许昌市许昌市","thing":"夏，元公卒。秌，葬元公。","year":"-482"}],"lastName":"成","relations":[{"searchText":"许斯","type":"儿子","who":"O1hwRKFAmo5MSsAJ"}],"sex":"男","wordName":"後恩","_id":"Ld8eeaJs5cRyqd2T"}
 {"avatar":"陈群","birthYear":"167","deathYear":"235","firstName":"陈","lastName":"群","sex":"男","wordName":"长文","_id":"LpthyuPPD8qsunip"}
 {"avatar":"邓茂","birthYear":"147","deathYear":"184","firstName":"邓","lastName":"茂","sex":"男","_id":"LzF7ZnexTwHndt6P"}
 {"avatar":"严政","birthYear":"151","deathYear":"189","firstName":"严","lastName":"政","sex":"男","_id":"M9YmwWM1PbQt0Mt6"}
@@ -258,6 +259,7 @@
 {"avatar":"贺齐","birthYear":"171","deathYear":"227","firstName":"贺","lastName":"齐","sex":"男","wordName":"公苗","_id":"NoQ3evYZ3f89T6cL"}
 {"avatar":"刘勋","birthYear":"163","deathYear":"216","firstName":"刘","lastName":"勋","sex":"男","wordName":"子台","_id":"NuFontPrjN95EIAq"}
 {"avatar":"霍弋","birthYear":"207","deathYear":"270","firstName":"霍","lastName":"弋","sex":"男","wordName":"绍先","_id":"NyDIOeEysbtMMbeM"}
+{"birthYear":"-545","birthYearGuess":true,"deathYear":"-504","deathYearGuess":true,"firstName":"许","histories":[{"place":"河南省许昌市许昌市","searchText":"河南省许昌市许昌市","thing":"出生","year":"-545"},{"place":"河南省许昌市许昌市","searchText":"河南省许昌市许昌市","thing":"登王位，生许成","year":"-522"},{"place":"河南省许昌市许昌市","searchText":"河南省许昌市许昌市","thing":"许国被郑国所灭，他被夺去君主称号","year":"-504"}],"lastName":"斯","relations":[{"searchText":"许成後恩","type":"父亲","who":"Ld8eeaJs5cRyqd2T"},{"searchText":"许虺","type":"二哥","who":"k29kD2DoOV1r0FLo"}],"sex":"男","_id":"O1hwRKFAmo5MSsAJ"}
 {"avatar":"马玩","birthYear":"170","deathYear":"211","firstName":"马","lastName":"玩","sex":"男","_id":"O4LJUkerZV59KQnX"}
 {"avatar":"土安","birthYear":"191","deathYear":"225","firstName":"土","lastName":"安","sex":"男","_id":"O5wLBj19hy3w6xxr"}
 {"avatar":"吴质","birthYear":"177","deathYear":"230","firstName":"吴","lastName":"质","sex":"男","wordName":"季重","_id":"OQIyyGkFmEr0GAIO"}
@@ -499,6 +501,7 @@
 {"avatar":"石苞","birthYear":"214","deathYear":"272","firstName":"石","lastName":"苞","sex":"男","wordName":"仲容","_id":"jw69eNA7p9XT5UGk"}
 {"avatar":"高顺","birthYear":"162","deathYear":"198","firstName":"高","lastName":"顺","sex":"男","_id":"jyBLwRaFu4hqrr8C"}
 {"avatar":"甘宁","birthYear":"174","deathYear":"222","firstName":"甘","lastName":"宁","sex":"男","wordName":"兴霸","_id":"jydyg5hd6mtEhQxU"}
+{"birthYear":"-548","birthYearGuess":true,"deathYear":"-502","deathYearGuess":true,"firstName":"许","lastName":"虺","relations":[{"searchText":"许斯","type":"五弟","who":"O1hwRKFAmo5MSsAJ"}],"sex":"男","_id":"k29kD2DoOV1r0FLo"}
 {"avatar":"刘磐","birthYear":"168","deathYear":"210","firstName":"刘","lastName":"磐","sex":"男","_id":"k9iRqnDmm1W3d4vt"}
 {"avatar":"车胄","birthYear":"164","deathYear":"199","firstName":"车","lastName":"胄","sex":"男","_id":"kRoDsiNXBfYB542O"}
 {"avatar":"辛评","birthYear":"165","deathYear":"204","firstName":"辛","lastName":"评","sex":"男","wordName":"仲治","_id":"kWsaLddulbKNmjYD"}

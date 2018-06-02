@@ -214,7 +214,8 @@
         $scope.save = function() {
             if($scope.people.histories) {
                 // 给履历按年份排序
-                $scope.people.histories = _.orderBy($scope.people.histories, ['year'], ['asc']);
+                //$scope.people.histories = _.orderBy($scope.people.histories, ['year'], ['asc']);
+                $scope.people.histories = _.sortBy($scope.people.histories, function(o) { return parseInt(o.year); });
             }
             
             if(!angular.equals($scope.people, old)) {                                
